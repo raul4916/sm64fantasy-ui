@@ -1,8 +1,9 @@
 import {Component} from "react";
 import "../less/main.css";
 import {ContentWindow} from "./ContentWindow";
-import {Sidebar} from "./Sidebar";
+import {TwitchSidebar} from "./TwitchSidebar";
 import {NavBar} from "./NavBar";
+import {DraftPickTable} from "../draft/DraftPickTable";
 
 export class MainWindow extends Component {
 
@@ -11,7 +12,7 @@ export class MainWindow extends Component {
             <div>
                 <NavBar/>
                 <div className={'dark-main-bg'}>
-                    <Sidebar/>
+                    <TwitchSidebar/>
                     <ContentWindow/>
                 </div>
             </div>

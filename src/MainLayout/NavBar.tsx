@@ -1,13 +1,16 @@
-import {Component} from "react";
+import {Component, CSSProperties} from "react";
 import "../less/main.css";
-import {ContentWindow} from "./ContentWindow";
-import {Sidebar} from "./Sidebar";
 
-export class NavBar extends Component {
+type Props = {
+    styleChange: CSSProperties
+}
 
-    render() {
+export const NavBar = (props: Props) => {
         return (
-            <ul className="nav navbar nav-justified color-check">
+            <ul className="nav navbar nav-justified color-check" >
+                <li className="nav-item dark-btn">
+                    <div className="text-white dark-btn" aria-current="page">League Leaders</div>
+                </li>
                 <li className="nav-item dark-btn">
                     <div className="text-white dark-btn" aria-current="page">League Leaders</div>
                 </li>
@@ -19,5 +22,4 @@ export class NavBar extends Component {
                 </li>
             </ul>
         );
-    }
 }

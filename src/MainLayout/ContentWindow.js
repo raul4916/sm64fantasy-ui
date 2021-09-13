@@ -1,25 +1,17 @@
-import {Component} from "react";
 import "../less/main.css";
 import '../bootstrap-5.1.0-dist/css/bootstrap.css'
 import {ContentRow} from "../content/ContentRow";
+import {DraftPickTable} from "../draft/DraftPickTable";
+import {Content} from "../content/Content";
+import {DraftTable} from "../draft/DraftTable";
+import {TeamDraftedPlayers} from "../draft/TeamDraftedPlayers";
 
 export const ContentWindow = () => {
-    const soonMario = () => {
-        return (
-            <div>
-                <img src={"https://thumbs.gfycat.com/AmusedQuaintAlleycat-max-1mb.gif"} className="App-logo"
-                     alt="logo"/>
-                <p>
-                    Super Mario 64 Fantasy Coming Soon
-                </p>
-            </div>
-        )
-    }
-
     return (
         <div className={'dark-content-bg'}>
-            <ContentRow/>
-            <ContentRow/>
+            <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
+            <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
+            <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
         </div>
     )
 }
