@@ -14,23 +14,6 @@ import {Button} from "@material-ui/core";
 import axios, {AxiosResponse} from "axios";
 import {ReactComponent} from "*.svg";
 
-const useStyles = makeStyles({
-    table: {
-        backgroundColor: '#16181D',
-        width: '50rem',
-
-    },
-    container: {
-        maxHeight: 440,
-        backgroundColor: '#16181D',
-        borderColor: '#16181D',
-        color: 'white',
-
-    },
-    cell: {}
-});
-
-
 type Player = {
     team: string,
     runnerTag: string
@@ -38,7 +21,6 @@ type Player = {
 }
 
 export const TeamDraftedPlayers = () => {
-    const classes = useStyles();
 
     const players: Player[][] = [
         [
@@ -74,8 +56,7 @@ export const TeamDraftedPlayers = () => {
         players.forEach((player) => {
                 tables.push(
                     // @ts-ignore
-                    <DataGrid className={classes.container} hideFooter={true}
-                              columns={[{field: 'runnerTag', headerName: player[0].team, width: 200}]}
+                    <DataGrid hideFooter={true} columns={[{field: 'runnerTag', headerName: player[0].team, width: 200}]}
                               rows={player}>
                     </DataGrid>
                 )
