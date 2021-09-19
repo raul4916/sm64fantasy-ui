@@ -17,12 +17,20 @@ import axios, {AxiosResponse} from "axios";
 const useStyles = makeStyles({
     table: {
         height: "500",
-
+        backgroundColor: '#16181D',
     },
     container: {
         maxHeight: 440,
-        width: '31rem'
+        width: '31rem',
+        backgroundColor: '#16181D',
+        borderColor: '#16181D',
+
     },
+    cell: {
+        color: 'white',
+        borderColor: '#16181D',
+        hover: '#3a3f4d'
+    }
 });
 
 function createData(tag: string, pb16: string, pb70: string, pb120: string, team: string) {
@@ -101,23 +109,23 @@ export const DraftTable = () => {
             <Table aria-label="simple table" size={'small'}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Runner Tag</TableCell>
-                        <TableCell>PB - 16 Stars</TableCell>
-                        <TableCell>PB - 70 Stars</TableCell>
-                        <TableCell>PB - 120 Stars</TableCell>
-                        <TableCell align="right">Team</TableCell>
+                        <TableCell className={classes.cell}>Runner Tag</TableCell>
+                        <TableCell className={classes.cell}>PB - 16 Stars</TableCell>
+                        <TableCell className={classes.cell}>PB - 70 Stars</TableCell>
+                        <TableCell className={classes.cell}>PB - 120 Stars</TableCell>
+                        <TableCell className={classes.cell} align="right">Team</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.tag}>
-                            <TableCell component="th" scope="row">
+                            <TableCell className={classes.cell} component="th" scope="row">
                                 {row.tag}
                             </TableCell>
-                            <TableCell>{row.pb16}</TableCell>
-                            <TableCell>{row.pb70}</TableCell>
-                            <TableCell>{row.pb120}</TableCell>
-                            <TableCell>{row.team}</TableCell>
+                            <TableCell className={classes.cell}>{row.pb16}</TableCell>
+                            <TableCell className={classes.cell}>{row.pb70}</TableCell>
+                            <TableCell className={classes.cell}>{row.pb120}</TableCell>
+                            <TableCell className={classes.cell}>{row.team}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
