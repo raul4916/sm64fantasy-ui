@@ -1,5 +1,3 @@
-import {DraftPickTable} from "../draft/DraftPickTable";
-
 export const Content = () => {
     return (
         <div className={'flex-c secondary-bg-color m-2 content-column'}>

@@ -85,20 +85,16 @@ export const TeamDraftedPlayers = () => {
 
     (playersInTeamTableCell());
 
-    const getCurrentPicks = (row: any) => {
-        // axios.get('http://localhost:8000/picks').then((value: AxiosResponse<any>) => {
-        //         '{capt: \'gtm\', pick: row}'
-        //     }
-        // )
 
-        console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
+    const useEffect = () => {
     }
+
 
     return (
         <div className={'flex-r justify-content-center m-2 flex-wrap'}>
             {
                 tables.map((table) => {
-                    return (<div className={'m-4'} style={{height: "400px", width: '250px', background: "white"}}>
+                    return (<div className={'m-4'} style={{height: "400px", width: '250px'}}>
                         {table}
                     </div>)
                 })

@@ -12,6 +12,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
 import axios, {AxiosResponse} from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {bindActionCreators} from "redux";
+import {getDraftInfo} from "./redux/actionCreators";
+import {DraftStates} from "../MainLayout/MainWindow";
 
 
 const useStyles = makeStyles({
@@ -98,18 +102,20 @@ export const DraftTable = () => {
         //         '{capt: \'gtm\', pick: row}'
         //     }
         // )
-        ;
-        console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
+        // console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
     }
 
     const classes = useStyles();
 
+    const dispatch = useDispatch();
+    const state = useSelector((state: DraftStates) => state.draftReduce)
+    
     return (
         <TableContainer className={classes.container} component={Paper}>
             <Table aria-label="simple table" size={'small'}>
                 <TableHead>
-                    <TableRow>
-                        <TableCell className={classes.cell}>Runner Tag</TableCell>
+                    <TableRow className={'hover-color'}>
+                        <TableCell className={classes.cell}>)</TableCell>
                         <TableCell className={classes.cell}>PB - 16 Stars</TableCell>
                         <TableCell className={classes.cell}>PB - 70 Stars</TableCell>
                         <TableCell className={classes.cell}>PB - 120 Stars</TableCell>
@@ -118,7 +124,7 @@ export const DraftTable = () => {
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
-                        <TableRow key={row.tag}>
+                        <TableRow key={row.tag} className={'hover-color'}>
                             <TableCell className={classes.cell} component="th" scope="row">
                                 {row.tag}
                             </TableCell>
