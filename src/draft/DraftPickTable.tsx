@@ -11,7 +11,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
-import axios, {AxiosResponse} from "axios";
 
 
 const useStyles = makeStyles({
@@ -31,21 +30,6 @@ const useStyles = makeStyles({
         borderColor: '#16181D',
     }
 });
-
-
-const pokemon = {
-    pikachu: {
-        color: 'yellow',
-        race: 'mouse',
-        power: 'electrical',
-        ability: 'shock'
-    }
-}
-
-const powerPickachu = pokemon.pikachu.ability;
-
-
-console.log(powerPickachu);
 
 function createData(tag: string, pb16: string, pb70: string, pb120: string, rank: number, id: number) {
     return {tag, pb16, pb70, pb120, rank, id};
