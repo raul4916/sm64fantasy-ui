@@ -10,8 +10,6 @@ import {bindActionCreators} from "redux";
 import {setDraftInfo} from "./redux/actionCreators";
 import {useEffect} from "react";
 import axios, {AxiosResponse} from "axios";
-import {json} from "stream/consumers";
-
 
 export const DraftContentWindow = () => {
 
@@ -23,27 +21,26 @@ export const DraftContentWindow = () => {
         let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
         axios.get('http://localhost:8000/api/get-draft-info?season_id=1', config).then((value: AxiosResponse<any>) => {
 
-                const season = JSON.parse(value.data.season)[0]
-                const draft = JSON.parse(value.data.draft)[0];
-                const teams = JSON.parse(value.data.teams);
-                const available_draft_runners = JSON.parse(value.data.available_draft_runners)
-                const picked_draft_runners = JSON.parse(value.data.picked_draft_runners)
-                const runners = JSON.parse(value.data.runners)
+                const season = value.data.season;
+                // const draft = value.data.draft)[0];
+                // const teams = value.data.teams;
+                const available_draft_runners = value.data.available_draft_runners
+                const picked_draft_runners = value.data.picked_draft_runners
+                // const runners = value.data.runners
 
 
-                const b = {
-                    'season': season.pk,
-                    'draft': draft,
-                    'teams': teams,
+                const newDraftState = {
+                    'season': season.id,
+                    'draft': 1,
+                    'teams': [],
                     'available_draft_runners': available_draft_runners,
                     'picked_draft_runners': picked_draft_runners,
-                    'runners': runners,
                 }
 
-                console.log(JSON.stringify(b))
+                console.log(newDraftState)
 
+                draftInfo.setDraftInfo(newDraftState);
 
-                draftInfo.setDraftInfo(b)
             }
         ).catch((error) => {
             console.log(error)
@@ -53,10 +50,8 @@ export const DraftContentWindow = () => {
     }
 
     useEffect(() => {
-            console.log(state)
-            setTimeout(getCurrentPicks, 3000)
-            return clearInterval;
-        }
+            setInterval(getCurrentPicks, 3000)
+        }, []
     )
     return (
         <div className={'dark-content-bg'}>

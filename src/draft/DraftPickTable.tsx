@@ -11,6 +11,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
+import {useDispatch, useSelector} from "react-redux";
+import {DraftStates} from "../MainLayout/MainWindow";
+import axios, {AxiosResponse} from "axios";
+import {AvailableDraftRunner} from "./redux/DraftReducer";
+import {bindActionCreators} from "redux";
+import {setDraftInfo} from "./redux/actionCreators";
 
 
 const useStyles = makeStyles({
@@ -31,29 +37,63 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(tag: string, pb16: string, pb70: string, pb120: string, rank: number, id: number) {
-    return {tag, pb16, pb70, pb120, rank, id};
-}
-
 
 export const DraftPickTable = () => {
 
-    const rows = [
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", 1, 24),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", 2, 37),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", 3, 24),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", 4, 67),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", 5, 49),
-    ];
+    const draftState = useSelector((state: DraftStates) => state.draftReduce)
+    const dispatch = useDispatch();
+    const draftInfo = bindActionCreators({setDraftInfo}, dispatch)
 
-    const submitPick = (row: any) => {
-        // axios.post('http://backend.sm64fantasy.com/submit-pick', {capt: 'gtm', pick: row});
-        console.log('http://backend.sm64fantasy.com/', {capt: 'gtm', pick: row});
+    const getCurrentPicks = () => {
+        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
+        axios.get('http://localhost:8000/api/get-draft-info?season_id=1', config).then((value: AxiosResponse<any>) => {
+
+                const season = value.data.season;
+                // const draft = value.data.draft)[0];
+                // const teams = value.data.teams;
+                const available_draft_runners = value.data.available_draft_runners
+                const picked_draft_runners = value.data.picked_draft_runners
+                // const runners = value.data.runners
+
+
+                const newDraftState = {
+                    'season': season.id,
+                    'draft': 1,
+                    'teams': [],
+                    'available_draft_runners': available_draft_runners,
+                    'picked_draft_runners': picked_draft_runners,
+                }
+
+                draftInfo.setDraftInfo(newDraftState);
+
+            }
+        ).catch((error) => {
+            console.log(error)
+        })
+
+        // console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
+    }
+
+    const submitPick = (availRunner: AvailableDraftRunner) => {
+        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
+        axios.put("http://localhost:8000/api/draft-runner/" + availRunner.id + "/", {
+            "draft_type": availRunner.draft_type,
+            "draft_status": "picked",
+            "description": availRunner.description,
+            "order_drafted": draftState.picked_draft_runners.length,
+            "runner": availRunner.runner.id,
+            "draft": availRunner.draft,
+        }, config).then((response) => {
+            getCurrentPicks()
+        }).catch(
+            (error) => {
+                console.log(error)
+            }
+        );
     }
 
 
     useEffect(() => {
-        // setInterval(getCurrentPicks, 3000)
     })
 
     const classes = useStyles();
@@ -74,19 +114,24 @@ export const DraftPickTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.tag}>
+                        {draftState.available_draft_runners.map((availableDraftRunner) => (
+                            <TableRow key={availableDraftRunner.runner.speedrun_name + '_drafted'}
+                                      className={'hover-color'}>
                                 <TableCell className={classes.cell} component="th" scope="row">
-                                    {row.tag}
+                                    {availableDraftRunner.runner.speedrun_name}
                                 </TableCell>
-                                <TableCell className={classes.cell}>{row.pb16}</TableCell>
-                                <TableCell className={classes.cell}>{row.pb70}</TableCell>
-                                <TableCell className={classes.cell}>{row.pb120}</TableCell>
-                                <TableCell className={classes.cell}>{row.rank}</TableCell>
+                                <TableCell
+                                    className={classes.cell}>{availableDraftRunner.runner.runner_stat.pb16}</TableCell>
+                                <TableCell
+                                    className={classes.cell}>{availableDraftRunner.runner.runner_stat.pb70}</TableCell>
+                                <TableCell
+                                    className={classes.cell}>{availableDraftRunner.runner.runner_stat.pb120}</TableCell>
+
+                                <TableCell className={classes.cell}>{availableDraftRunner.team}</TableCell>
                                 <TableCell className={classes.cell} align={'center'}>{
                                     <Button variant={'contained'} color={'primary'}
                                             onClick={() => {
-                                                submitPick(row)
+                                                submitPick(availableDraftRunner)
                                             }}
                                     >Pick</Button>}</TableCell>
                             </TableRow>

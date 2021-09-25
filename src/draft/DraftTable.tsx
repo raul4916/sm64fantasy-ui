@@ -10,12 +10,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {Button} from "@material-ui/core";
-import axios, {AxiosResponse} from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {bindActionCreators} from "redux";
-import {getDraftInfo} from "./redux/actionCreators";
+import {useSelector} from "react-redux";
 import {DraftStates} from "../MainLayout/MainWindow";
+import {Button} from "@material-ui/core";
+import {PickedDraftRunner} from "./redux/DraftReducer";
+import axios from "axios";
 
 
 const useStyles = makeStyles({
@@ -37,101 +36,60 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(tag: string, pb16: string, pb70: string, pb120: string, team: string) {
-    return {
-        tag, pb16, pb70, pb120, team
-    }
-}
-
 
 export const DraftTable = () => {
-    const rows = [
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", "GTM"),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", "Sexy team"),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", "The Best?"),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", "The trollers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", "GTM"),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", "Sexy team"),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", "The Best?"),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", "The trollers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", "GTM"),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", "Sexy team"),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", "The Best?"),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", "The trollers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", "GTM"),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", "Sexy team"),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", "The Best?"),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", "The trollers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-
-        createData('Frozen yoghurt', "1:30:12", "1:30:12", "1:30:12", "GTM"),
-        createData('Ice cream sandwich', "1:30:12", "1:30:12", "1:30:12", "Sexy team"),
-        createData('Eclair', "1:30:12", "1:30:12", "1:30:12", "The Best?"),
-        createData('Cupcake', "1:30:12", "1:30:12", "1:30:12", "The trollers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-        createData('Gingerbread', "1:30:12", "1:30:12", "1:30:12", "The Slowers"),
-    ];
-
-    const getCurrentPicks = (row: any) => {
-        // axios.get('http://localhost:8000/picks').then((value: AxiosResponse<any>) => {
-        //         '{capt: \'gtm\', pick: row}'
-        //     }
-        // )
-        // console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
-    }
 
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const state = useSelector((state: DraftStates) => state.draftReduce)
-    
+    const draftState = useSelector((state: DraftStates) => state.draftReduce)
+
+    const revertPick = (pickedDraftRunner: PickedDraftRunner) => {
+        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
+        axios.put("http://localhost:8000/api/draft-runner/" + pickedDraftRunner.id + "/", {
+            "draft_type": pickedDraftRunner.draft_type,
+            "draft_status": "available",
+            "description": pickedDraftRunner.description,
+            "order_drafted": draftState.picked_draft_runners.length,
+            "runner": pickedDraftRunner.runner.id,
+            "draft": pickedDraftRunner.draft,
+        }, config).catch(
+            (error) => {
+                console.log(error)
+            }
+        );
+
+    }
+
     return (
         <TableContainer className={classes.container} component={Paper}>
             <Table aria-label="simple table" size={'small'}>
                 <TableHead>
                     <TableRow className={'hover-color'}>
-                        <TableCell className={classes.cell}>)</TableCell>
+                        <TableCell className={classes.cell}><h5>Name</h5></TableCell>
                         <TableCell className={classes.cell}>PB - 16 Stars</TableCell>
                         <TableCell className={classes.cell}>PB - 70 Stars</TableCell>
                         <TableCell className={classes.cell}>PB - 120 Stars</TableCell>
-                        <TableCell className={classes.cell} align="right">Team</TableCell>
+                        <TableCell className={classes.cell} align="right"><h5>Team</h5></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.tag} className={'hover-color'}>
+                    {draftState.picked_draft_runners.map((pickedDraftRunner) => (
+                        <TableRow key={pickedDraftRunner.runner.speedrun_name + '_drafted'}
+                                  className={'hover-color'}>
                             <TableCell className={classes.cell} component="th" scope="row">
-                                {row.tag}
+                                {pickedDraftRunner.runner.speedrun_name}
                             </TableCell>
-                            <TableCell className={classes.cell}>{row.pb16}</TableCell>
-                            <TableCell className={classes.cell}>{row.pb70}</TableCell>
-                            <TableCell className={classes.cell}>{row.pb120}</TableCell>
-                            <TableCell className={classes.cell}>{row.team}</TableCell>
+                            <TableCell className={classes.cell}>{pickedDraftRunner.runner.runner_stat.pb16}</TableCell>
+                            <TableCell className={classes.cell}>{pickedDraftRunner.runner.runner_stat.pb70}</TableCell>
+                            <TableCell className={classes.cell}>{pickedDraftRunner.runner.runner_stat.pb120}</TableCell>
+                            <TableCell className={classes.cell}>{pickedDraftRunner.team}</TableCell>
+                            <TableCell className={classes.cell} align={'center'}>{
+                                <Button variant={'contained'} color={'primary'}
+                                        onClick={() => {
+                                            revertPick(pickedDraftRunner)
+                                        }}
+                                >Pick</Button>}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
