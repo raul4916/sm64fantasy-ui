@@ -1,31 +1,68 @@
-import {Component} from "react";
+import {Component, useEffect} from "react";
 import "../less/main.css";
 import {TwitchSidebar} from "./TwitchSidebar";
 import {NavBar} from "./NavBar";
 import {DraftContentWindow} from "../draft/DraftContentWindow";
-import {Provider} from "react-redux";
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunk from "redux-thunk";
-import {DraftReducer} from "../draft/redux/DraftReducer";
-
-const rootReducer = combineReducers(
-    {draftReduce: DraftReducer}
-);
+import {useDispatch} from "react-redux";
+import {bindActionCreators} from "redux";
+import {loginUser} from "../login/redux/actionCreators";
+import {LoginComponent, updateLoginInfo} from "../login/LoginComponent";
+import {ContentWindow} from "./ContentWindow";
+import {Router, Route, Link, Switch, BrowserRouter} from "react-router-dom";
 
 export const MainWindow = () => {
 
-    const store = createStore(rootReducer, {}, applyMiddleware(thunk));
+    const dispatch = useDispatch();
+    const userInfo = bindActionCreators({loginUser}, dispatch)
+
+
+    useEffect(() => {
+        updateLoginInfo(userInfo);
+    })
+
+    const draftWindowRoute = () => {
+        return (
+            <div className={'dark-main-bg'}>
+                <TwitchSidebar/>
+                <DraftContentWindow/>
+            </div>
+
+        )
+    }
+
+    const twitchWindowRoute = () => {
+        return (
+            <Route path={"/"}>
+                <div className={'dark-main-bg'}>
+                    <TwitchSidebar/>
+                    <ContentWindow/>
+                </div>
+            </Route>
+        )
+    }
+
+    const loginComponent = () => {
+        return (
+            <Route path={"/"}>
+                <div className={'dark-main-bg'}>
+                    <LoginComponent/>
+                </div>
+            </Route>
+        )
+    }
 
     return (
         <div>
             <NavBar/>
-            <div className={'dark-main-bg'}>
-                <TwitchSidebar/>
-                <Provider store={store}>
-                    <DraftContentWindow/>
-                </Provider>
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route path={"/"} exact component={twitchWindowRoute}/>
+                    <Route path={"/draft/"} component={draftWindowRoute}/>
+                    <Route path={"/login"} component={loginComponent}/>
+                </Switch>
+            </BrowserRouter>
         </div>
     )
+
 }
-export type DraftStates = ReturnType<typeof rootReducer>
+

@@ -9,9 +9,7 @@ import {TeamDraftedPlayers} from "../draft/TeamDraftedPlayers";
 export const ContentWindow = () => {
     return (
         <div className={'dark-content-bg'}>
-            <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
-            <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
-            <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
+            
         </div>
     )
 }

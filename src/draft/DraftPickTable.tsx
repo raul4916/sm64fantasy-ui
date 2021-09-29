@@ -12,18 +12,20 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
-import {DraftStates} from "../MainLayout/MainWindow";
+import {State} from "../App";
 import axios, {AxiosResponse} from "axios";
-import {AvailableDraftRunner} from "./redux/DraftReducer";
+import {AvailableDraftRunner, DraftRunner, PickedDraftRunner} from "./redux/DraftReducer";
 import {bindActionCreators} from "redux";
 import {setDraftInfo} from "./redux/actionCreators";
+import Cookies from "universal-cookie";
 
 
 const useStyles = makeStyles({
     table: {
         backgroundColor: '#16181D',
-        width: '50rem',
+        // width: '45rem',
         borderColor: '#16181D',
+        // maxHeight: '60rem'
     },
     container: {
         maxHeight: 440,
@@ -40,12 +42,13 @@ const useStyles = makeStyles({
 
 export const DraftPickTable = () => {
 
-    const draftState = useSelector((state: DraftStates) => state.draftReduce)
+    const draftState = useSelector((state: State) => state.draftReduce)
+    const userState = useSelector((state: State) => state.userReduce)
     const dispatch = useDispatch();
     const draftInfo = bindActionCreators({setDraftInfo}, dispatch)
-
+    const cookies = new Cookies();
     const getCurrentPicks = () => {
-        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
+        let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
         axios.get('http://localhost:8000/api/get-draft-info?season_id=1', config).then((value: AxiosResponse<any>) => {
 
                 const season = value.data.season;
@@ -74,9 +77,25 @@ export const DraftPickTable = () => {
         // console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
     }
 
+    const uiUpdatePicks = (playerId: number, team: string) => {
+        draftState.available_draft_runners.forEach((runner: DraftRunner, index: number) => {
+            if (runner.id == playerId) {
+                draftState.available_draft_runners.splice(index, 1)
+
+                draftState.picked_draft_runners.push({...runner, draft_status: "picked"})
+                console.log(draftState.picked_draft_runners)
+                const newDraftState = {...draftState}
+                draftInfo.setDraftInfo({...draftState})
+            }
+        })
+    }
+
     const submitPick = (availRunner: AvailableDraftRunner) => {
-        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
-        axios.put("http://localhost:8000/api/draft-runner/" + availRunner.id + "/", {
+        let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
+
+        uiUpdatePicks(availRunner.id, availRunner.team);
+
+        axios.put("http://localhost:8000/api/draft-runners/" + availRunner.id + "/", {
             "draft_type": availRunner.draft_type,
             "draft_status": "picked",
             "description": availRunner.description,
@@ -84,7 +103,6 @@ export const DraftPickTable = () => {
             "runner": availRunner.runner.id,
             "draft": availRunner.draft,
         }, config).then((response) => {
-            getCurrentPicks()
         }).catch(
             (error) => {
                 console.log(error)
@@ -98,6 +116,15 @@ export const DraftPickTable = () => {
 
     const classes = useStyles();
 
+    const PickButtonCell = (availableDraftRunner: AvailableDraftRunner) => {
+        return userState.loggedIn ?
+            (<TableCell className={classes.cell}>{
+                <Button variant={'contained'} color={'primary'}
+                        onClick={() => {
+                            submitPick(availableDraftRunner)
+                        }}
+                >Pick</Button>}</TableCell>) : null
+    }
     return (
         <div className={'draft-window'}>
             <TableContainer className={classes.table} component={Paper}>
@@ -108,9 +135,7 @@ export const DraftPickTable = () => {
                             <TableCell className={classes.cell}>PB - 16 Stars</TableCell>
                             <TableCell className={classes.cell}>PB - 70 Stars</TableCell>
                             <TableCell className={classes.cell}>PB - 120 Stars</TableCell>
-                            <TableCell
-                                className={classes.cell}>Rank</TableCell>
-                            <TableCell className={classes.cell} align="center">Action</TableCell>
+                            <TableCell className={classes.cell}>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -126,14 +151,8 @@ export const DraftPickTable = () => {
                                     className={classes.cell}>{availableDraftRunner.runner.runner_stat.pb70}</TableCell>
                                 <TableCell
                                     className={classes.cell}>{availableDraftRunner.runner.runner_stat.pb120}</TableCell>
+                                {PickButtonCell(availableDraftRunner)}
 
-                                <TableCell className={classes.cell}>{availableDraftRunner.team}</TableCell>
-                                <TableCell className={classes.cell} align={'center'}>{
-                                    <Button variant={'contained'} color={'primary'}
-                                            onClick={() => {
-                                                submitPick(availableDraftRunner)
-                                            }}
-                                    >Pick</Button>}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

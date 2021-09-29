@@ -6,23 +6,26 @@ services:
     command: npm start
     volumes:
       - .:/code
-    #    networks:
-    #      - backbone
+    networks:
+      - my-proxy-net
+      - default
     ports:
       - "3000:3000"
-#  nginx:
-#    image: nginx
-#    container_name: nginx
-#    volumes:
-#      - ./nginx-configs:/etc/nginx/conf.d
-#    ports:
-#      - "80:80"
-#    networks:
-#      - backbone
+
+
+
+      #  nginx:
+      #    image: nginx
+      #    container_name: nginx
+      #    volumes:
+      #      - ./nginx-configs:/etc/nginx/conf.d
+      #    ports:
+#        - "80:80"
+
 volumes:
   web_front:
 
-
 networks:
-  backbone:
-    driver: bridge
+  my-proxy-net:
+    external:
+      name: sm64fantasy_api

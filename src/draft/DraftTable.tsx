@@ -11,10 +11,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useSelector} from "react-redux";
-import {DraftStates} from "../MainLayout/MainWindow";
+import {State} from "../App";
 import {Button} from "@material-ui/core";
 import {PickedDraftRunner} from "./redux/DraftReducer";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 
 const useStyles = makeStyles({
@@ -41,11 +42,11 @@ export const DraftTable = () => {
 
     const classes = useStyles();
 
-    const draftState = useSelector((state: DraftStates) => state.draftReduce)
-
+    const draftState = useSelector((state: State) => state.draftReduce)
+    const cookies = new Cookies();
     const revertPick = (pickedDraftRunner: PickedDraftRunner) => {
-        let config = {headers: {'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjMyOTI0MDcyLCJlbWFpbCI6ImFAYi5jb20iLCJvcmlnX2lhdCI6MTYzMjQ5MjA3Mn0.K3pMT_nA96x76sAseMjh3L3fb9Js_AgsrERDp0eRbNQ'}}
-        axios.put("http://localhost:8000/api/draft-runner/" + pickedDraftRunner.id + "/", {
+        let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
+        axios.put("http://localhost:8000/api/draft-runners/" + pickedDraftRunner.id + "/", {
             "draft_type": pickedDraftRunner.draft_type,
             "draft_status": "available",
             "description": pickedDraftRunner.description,

@@ -62,7 +62,7 @@ export interface PickedDraftRunner {
     draft_type: string
     order_drafted: number
     runner: Runner
-    team: number
+    team: string
 }
 
 const a = {
@@ -185,7 +185,7 @@ export type AvailableDraftRunners = AvailableDraftRunner[]
 export type PickedDraftRunners = PickedDraftRunner[]
 
 export type Team = {
-    members: DraftRunner[]
+    roster: DraftRunner[]
     name: string
     id: number
 }
