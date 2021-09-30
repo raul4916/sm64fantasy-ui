@@ -49,7 +49,7 @@ export const DraftPickTable = () => {
     const cookies = new Cookies();
     const getCurrentPicks = () => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
-        axios.get('http://localhost:8000/api/get-draft-info?season_id=1', config).then((value: AxiosResponse<any>) => {
+        axios.get('http://backend.sm64fantasy.com/api/get-draft-info?season_id=1', config).then((value: AxiosResponse<any>) => {
 
                 const season = value.data.season;
                 // const draft = value.data.draft)[0];
@@ -74,7 +74,7 @@ export const DraftPickTable = () => {
             console.log(error)
         })
 
-        // console.log('http://localhost:8000/', {capt: 'gtm', pick: row});
+        // console.log('http://backend.sm64fantasy.com/', {capt: 'gtm', pick: row});
     }
 
     const uiUpdatePicks = (playerId: number, team: string) => {
@@ -95,7 +95,7 @@ export const DraftPickTable = () => {
 
         uiUpdatePicks(availRunner.id, availRunner.team);
 
-        axios.put("http://localhost:8000/api/draft-runners/" + availRunner.id + "/", {
+        axios.put("http://backend.sm64fantasy.com/api/draft-runners/" + availRunner.id + "/", {
             "draft_type": availRunner.draft_type,
             "draft_status": "picked",
             "description": availRunner.description,

@@ -12,7 +12,7 @@ const setupRunnerStat = (player: string, config: any) => {
         //120 wkpoo02r  70 7dgrrxk4 16 n2y55mko
         (response) => {
             let personalBests: any = response.data.data;
-            axios.get('http://localhost:8000/api/runner?name=' + player, config).then((response) => {
+            axios.get('http://backend.sm64fantasy.com/api/runner?name=' + player, config).then((response) => {
                 let data = response.data
 
                 console.log(data.id);
@@ -38,7 +38,7 @@ const setupRunnerStat = (player: string, config: any) => {
                         }
 
                         console.log(requestData);
-                        axios.post('http://localhost:8000/api/runner-stats', requestData, config).then(() => {
+                        axios.post('http://backend.sm64fantasy.com/api/runner-stats', requestData, config).then(() => {
 
                         }).then(() => {
                             const draftRunner = {
@@ -51,7 +51,7 @@ const setupRunnerStat = (player: string, config: any) => {
                                 runner: data.id,
                             }
 
-                            axios.post('http://localhost:8000/api/draft-runner', draftRunner, config).catch((error) => {
+                            axios.post('http://backend.sm64fantasy.com/api/draft-runner', draftRunner, config).catch((error) => {
 
                             })
                         }).catch((error) => {
@@ -90,7 +90,7 @@ export const UserUploader = () => {
                 count += 1
                 setTimeout(() => {
                         player.replace(/\s/g, "");
-                        axios.delete('http://localhost:8000/api/runner?name=' + player, config)
+                        axios.delete('http://backend.sm64fantasy.com/api/runner?name=' + player, config)
 
                         axios.get('https://www.speedrun.com/api/v1/users/' + player).then(
                             (response) => {
@@ -109,7 +109,7 @@ export const UserUploader = () => {
                                 }
 
                                 console.log(playerInfo);
-                                axios.post('http://localhost:8000/api/runner', playerInfo, config).then(response => {
+                                axios.post('http://backend.sm64fantasy.com/api/runner', playerInfo, config).then(response => {
                                     setupRunnerStat(player, config)
                                 }).catch((error) => {
                                     console.log(error);
@@ -139,6 +139,6 @@ export const UserUploader = () => {
             <Button variant={'contained'} color={'primary'} onClick={upload}>UPLOAD</Button>
             <Button variant={'contained'} color={'primary'}>drafter</Button>
         </div>
-    
+
     return (addRunnersComponent)
 }

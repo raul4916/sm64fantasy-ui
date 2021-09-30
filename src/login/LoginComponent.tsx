@@ -15,7 +15,7 @@ export const updateLoginInfo = (userInfo: { loginUser: (userState: UserState) =>
     const cookies = new Cookies()
     const config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
 
-    axios.get("http://localhost:8000/api/user-public-info?username=" + cookies.get('username'), config).then(
+    axios.get("http://backend.sm64fantasy.com/api/user-public-info?username=" + cookies.get('username'), config).then(
         (response) => {
             userInfo.loginUser({
                 role: 'captain',
@@ -48,7 +48,10 @@ export const LoginComponent = () => {
 
     const submitCredentials =
         () => {
-            axios.post('http://localhost:8000/api-token-auth/', {'username': username, 'password': password}).then(
+            axios.post('http://backend.sm64fantasy.com/api-token-auth/', {
+                'username': username,
+                'password': password
+            }).then(
                 (response) => {
                     let cookies = new Cookies();
                     cookies.set('token', response.data.token);
