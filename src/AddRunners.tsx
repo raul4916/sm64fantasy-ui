@@ -47,7 +47,6 @@ const setupRunnerStat = (player: string, config: any) => {
                                 description: 'runner',
                                 draft: 1,
                                 order_drafted: 0,
-                                team: null,
                                 runner: data.id,
                             }
 
