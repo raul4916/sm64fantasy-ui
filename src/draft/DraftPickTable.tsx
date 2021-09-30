@@ -65,6 +65,7 @@ export const DraftPickTable = () => {
                     'teams': [],
                     'available_draft_runners': available_draft_runners,
                     'picked_draft_runners': picked_draft_runners,
+                    'wait': 0
                 }
 
                 draftInfo.setDraftInfo(newDraftState);

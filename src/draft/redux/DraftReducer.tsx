@@ -13,6 +13,7 @@ const initialState: DraftState = {
         // 'teams': [],
         'available_draft_runners': [],
         'picked_draft_runners': [],
+        'wait': 1
     }
 ;
 
@@ -196,6 +197,7 @@ export type DraftState = {
     'draft': number,
     'available_draft_runners': AvailableDraftRunners,
     'picked_draft_runners': PickedDraftRunners,
+    'wait': number
 }
 
 type Action = {
@@ -207,6 +209,10 @@ type Action = {
 export const DraftReducer = (state: DraftState = initialState, action: Action): DraftState => {
     switch (action.type) {
         case 'UPDATE_DRAFT_INFO':
+            clearInterval()
+            if (JSON.stringify(state) === JSON.stringify(action.draftState)) {
+                return {...action.draftState, wait: state.wait++}
+            }
             return action.draftState;
         case 'GET_DRAFT_INFO':
             return state;

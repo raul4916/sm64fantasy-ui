@@ -40,6 +40,7 @@ export const DraftContentWindow = () => {
                     'teams': [],
                     'available_draft_runners': available_draft_runners,
                     'picked_draft_runners': picked_draft_runners,
+                    'wait': state.wait
                 }
 
                 // console.log(newDraftState)
@@ -54,7 +55,7 @@ export const DraftContentWindow = () => {
 
     useEffect(() => {
             getCurrentPicks()
-            setInterval(getCurrentPicks, 3000)
+            setInterval(getCurrentPicks, 15000)
         }, []
     )
 
