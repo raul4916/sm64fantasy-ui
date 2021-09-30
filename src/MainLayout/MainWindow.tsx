@@ -53,8 +53,8 @@ export const MainWindow = () => {
 
     return (
         <div>
-            <NavBar/>
             <BrowserRouter>
+                <NavBar/>
                 <Switch>
                     <Route path={"/"} exact component={twitchWindowRoute}/>
                     <Route path={"/draft/"} component={draftWindowRoute}/>

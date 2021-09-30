@@ -1,5 +1,6 @@
 import {Component, CSSProperties} from "react";
 import "../less/main.css";
+import {Link} from "react-router-dom";
 
 type Props = {
     styleChange: CSSProperties
@@ -12,7 +13,9 @@ export const NavBar = () => {
                 <div className="text-white dark-btn" aria-current="page">League Leaders</div>
             </li>
             <li className="nav-item dark-btn">
-                <div className="text-white dark-btn" aria-current="page">Draft</div>
+                <Link to={'/draft'}>
+                    <div className="text-white dark-btn" aria-current="page">Draft</div>
+                </Link>
             </li>
             <li className="nav-item dark-btn">
                 <div className="text-white dark-btn" aria-current="page">Statistics</div>
