@@ -55,7 +55,7 @@ export const DraftContentWindow = () => {
 
     useEffect(() => {
             getCurrentPicks()
-            setInterval(getCurrentPicks, 15000)
+            setInterval(getCurrentPicks, 3000)
         }, []
     )
 

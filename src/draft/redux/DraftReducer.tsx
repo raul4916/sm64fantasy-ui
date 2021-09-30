@@ -66,119 +66,6 @@ export interface PickedDraftRunner {
     team: string
 }
 
-const a = {
-    "season_dict": {"id": 1, "type": "1", "description": "1"},
-    "available_draft_runners": [{
-        "id": 1,
-        "draft_type": "fantasy",
-        "draft_status": "available",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }, {
-        "id": 2,
-        "draft_type": "fantasy",
-        "draft_status": "available",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }, {
-        "id": 3,
-        "draft_type": "fantasy",
-        "draft_status": "available",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }, {
-        "id": 4,
-        "draft_type": "fantasy",
-        "draft_status": "available",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }, {
-        "id": 5,
-        "draft_type": "fantasy",
-        "draft_status": "available",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }],
-    "picked_draft_runners": [{
-        "id": 6,
-        "draft_type": "fantasy",
-        "draft_status": "picked",
-        "description": "This field is required.",
-        "draft": 1,
-        "order_drafted": 0,
-        "team": null,
-        "runner": {
-            "id": 1,
-            "type": "fantasy",
-            "description": "GTM",
-            "discord_name": "__GTM",
-            "twitch_link": null,
-            "speedrun_name": "ringo792",
-            "speedrun_link": "This field is required.",
-            "speedrun_api_link": null
-        }
-    }]
-}
 export type DraftRunner = AvailableDraftRunner | PickedDraftRunner
 
 export type AvailableDraftRunners = AvailableDraftRunner[]
@@ -209,7 +96,6 @@ type Action = {
 export const DraftReducer = (state: DraftState = initialState, action: Action): DraftState => {
     switch (action.type) {
         case 'UPDATE_DRAFT_INFO':
-            clearInterval()
             if (JSON.stringify(state) === JSON.stringify(action.draftState)) {
                 return {...action.draftState, wait: state.wait++}
             }
