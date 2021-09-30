@@ -89,7 +89,9 @@ export const UserUploader = () => {
                 count += 1
                 setTimeout(() => {
                         player.replace(/\s/g, "");
-                        axios.delete('http://backend.sm64fantasy.com/api/runner?name=' + player, config).catch()
+                        axios.delete('http://backend.sm64fantasy.com/api/runner?name=' + player, config).catch((error) => {
+                            console.log(error)
+                        })
 
                         axios.get('https://www.speedrun.com/api/v1/users/' + player).then(
                             (response) => {
