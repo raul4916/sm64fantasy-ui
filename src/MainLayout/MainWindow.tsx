@@ -67,7 +67,7 @@ export const MainWindow = () => {
                     <Route path={"/"} exact component={twitchWindowRoute}/>
                     <Route path={"/draft/"} component={draftWindowRoute}/>
                     <Route path={"/internal-tools"} component={internalTools}/>
-                    <Route path={"/login"} component={loginComponent()}/>
+                    <Route path={"/login"} component={loginComponent}/>
                 </Switch>
             </BrowserRouter>
         </div>
