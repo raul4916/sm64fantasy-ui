@@ -74,6 +74,17 @@ export const LoginComponent = () => {
             });
         }
 
+    const createUser =
+        () => {
+            axios.post('http://backend.sm64fantasy.com/api/user-public-info', {
+                'username': username,
+                'password': password
+            })
+                .catch((error) => {
+                    setAlert(true)
+                });
+        }
+
     const dispatch = useDispatch();
     const userInfo = bindActionCreators({loginUser}, dispatch)
 
@@ -88,6 +99,9 @@ export const LoginComponent = () => {
             <Button className={"w-25 m-1"} color={"primary"} variant='contained' onClick={
                 submitCredentials
             }>Login</Button>
+            <Button className={"w-50 m-1"} color={"primary"} variant='contained' onClick={
+                createUser
+            }>Create Account</Button>
         </div>
     }
     return (

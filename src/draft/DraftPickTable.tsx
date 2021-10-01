@@ -118,14 +118,18 @@ export const DraftPickTable = () => {
                         onClick={() => {
                             submitPick(availableDraftRunner)
                         }}
-                >Pick</Button>}</TableCell>) : null
+                >Pick</Button>}</TableCell>) : (
+                <TableCell className={classes.cell}>{
+                    <Button variant={'contained'} color={'primary'} disabled
+                    >Pick</Button>}</TableCell>)
     }
+    
     return (
         <div className={'draft-window'}>
             <TableContainer className={classes.table} component={Paper}>
                 <Table className={classes.table} aria-label="simple table" size={'small'}>
                     <TableHead>
-                        <TableRow className={'hover-color'}>
+                        <TableRow className={''}>
                             <TableCell className={classes.cell}>Runner Tag</TableCell>
                             <TableCell className={classes.cell}>PB - 16 Stars</TableCell>
                             <TableCell className={classes.cell}>PB - 70 Stars</TableCell>
@@ -136,7 +140,7 @@ export const DraftPickTable = () => {
                     <TableBody>
                         {draftState.available_draft_runners.map((availableDraftRunner) => (
                             <TableRow key={availableDraftRunner.runner.speedrun_name + '_drafted'}
-                                      className={'hover-color'}>
+                                      className={''}>
                                 <TableCell className={classes.cell} component="th" scope="row">
                                     {availableDraftRunner.runner.speedrun_name}
                                 </TableCell>
