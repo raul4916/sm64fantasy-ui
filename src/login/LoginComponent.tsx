@@ -34,6 +34,7 @@ export const LoginComponent = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [alert, setAlert] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const onUsernameChange = (event: any) => {
         setUsername(event.target.value);
@@ -45,6 +46,13 @@ export const LoginComponent = () => {
     let alertComponent = <Alert severity="error">
         <AlertTitle>Invalid Credentials</AlertTitle>
         Credentials incorrect or user doesnt exist </Alert>
+
+    let successComponent = (
+        <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Redirect doesnt exist yet, but go ahead
+        </Alert>
+    )
 
     const submitCredentials =
         () => {
@@ -58,6 +66,8 @@ export const LoginComponent = () => {
                     cookies.set('username', username);
 
                     updateLoginInfo(userInfo);
+                    setAlert(false)
+                    setSuccess(true)
                 }
             ).catch((error) => {
                 setAlert(true)
@@ -70,6 +80,7 @@ export const LoginComponent = () => {
     const loginComponent = () => {
         return <div className={'secondary-bg-color flex-c justify-content-center align-items-center m-1'}>
             {alert ? alertComponent : null}
+            {success ? successComponent : null}
             <h3>Login:</h3>
             <input className={"m-1"} type='text' onChange={onUsernameChange} placeholder={'Username'} value={username}/>
             <input className={"m-1"} type={'password'} onChange={onPasswordChange} placeholder={'Password'}

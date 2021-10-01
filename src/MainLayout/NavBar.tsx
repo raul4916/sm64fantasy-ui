@@ -9,20 +9,28 @@ type Props = {
 export const NavBar = () => {
     return (
         <ul className="nav navbar nav-justified color-check">
+
             <li className="nav-item dark-btn">
-                <div className="text-white dark-btn" aria-current="page">League Leaders</div>
-            </li>
-            <li className="nav-item dark-btn">
-                <Link to={'/draft'}>
-                    <div className="text-white dark-btn" aria-current="page">Draft</div>
+                <Link to={'/'} className={'text-decoration-none'}>
+                    <div className="text-white dark-btn " aria-current="page">
+                        Home
+                    </div>
                 </Link>
             </li>
+
             <li className="nav-item dark-btn">
-                <div className="text-white dark-btn" aria-current="page">Statistics</div>
+                <Link to={'/draft'} className={'text-decoration-none'}>
+                    <div className="text-white dark-btn" aria-current="page">
+                        Draft
+                    </div>
+                </Link>
             </li>
-            <li className="nav-item  dark-btn">
-                <div className="text-white dark-btn" aria-current="page">Speedrunner Statistics</div>
-            </li>
+
+            <Link to={'/login'} className={'border-light border-start  text-decoration-none'}>
+                <div className="text-white dark-btn" aria-current="page">
+                    Login
+                </div>
+            </Link>
         </ul>
     );
 }

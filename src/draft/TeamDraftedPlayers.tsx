@@ -45,28 +45,6 @@ export const TeamDraftedPlayers = () => {
             {id: 1, team: "bla", runnerTag: 'GTM'},
             {id: 2, team: "bla", runnerTag: 'GTM2.0'}
         ],
-        [
-            {id: 1, team: "bla2", runnerTag: 'GTM'},
-            {id: 2, team: "bla2", runnerTag: 'GTM2.0'}
-        ],
-        [{
-            id: 3,
-            team: "bla3",
-            runnerTag: 'GTM3'
-        }],
-        [
-            {id: 1, team: "bla", runnerTag: 'GTM'},
-            {id: 2, team: "bla", runnerTag: 'GTM2.0'}
-        ],
-        [
-            {id: 1, team: "bla2", runnerTag: 'GTM'},
-            {id: 2, team: "bla2", runnerTag: 'GTM2.0'}
-        ],
-        [{
-            id: 3,
-            team: "bla3",
-            runnerTag: 'GTM3'
-        }]
     ]
     const tables: ReactElement[] = [];
 

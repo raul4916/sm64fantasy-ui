@@ -23,7 +23,6 @@ export const MainWindow = () => {
     const draftWindowRoute = () => {
         return (
             <div className={'dark-main-bg'}>
-                <TwitchSidebar/>
                 <DraftContentWindow/>
             </div>
 

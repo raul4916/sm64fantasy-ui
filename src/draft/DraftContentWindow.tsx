@@ -35,7 +35,7 @@ export const DraftContentWindow = () => {
 
 
                 const newDraftState = {
-                    'season': season.id,
+                    'season': 1,
                     'draft': 1,
                     'teams': [],
                     'available_draft_runners': available_draft_runners,
@@ -54,7 +54,7 @@ export const DraftContentWindow = () => {
     }
 
     useEffect(() => {
-            getCurrentPicks()
+            getCurrentPicks('true')
             setInterval(getCurrentPicks, 3000)
         }, []
     )
@@ -67,9 +67,9 @@ export const DraftContentWindow = () => {
     return (
         <div className={'dark-content-bg'}>
             {UserUploaderComp()}
-            <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
-            <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
             <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
+            <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
+            <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
         </div>
     )
 }

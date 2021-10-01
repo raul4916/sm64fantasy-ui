@@ -25,13 +25,7 @@ const useStyles = makeStyles({
         backgroundColor: '#16181D',
         // width: '45rem',
         borderColor: '#16181D',
-        // maxHeight: '60rem'
-    },
-    container: {
-        maxHeight: 440,
-        backgroundColor: '#16181D',
-        borderColor: '#16181D',
-
+        maxHeight: '40rem',
     },
     cell: {
         color: 'white',

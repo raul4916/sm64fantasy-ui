@@ -23,7 +23,7 @@ export const ContentRow = (props: Props) => {
 
     const contentRow = () => {
         return (
-            <div>
+            <div className={'mb-xxl-5'}>
                 <div className={'content-row'}>
                     <div className={'flex-c m-2 mb-0 content-column'}>
                         <h2>{props.title}</h2>
