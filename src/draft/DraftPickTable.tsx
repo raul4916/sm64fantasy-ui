@@ -47,7 +47,7 @@ export const DraftPickTable = () => {
 
                 const season = value.data.season;
                 // const draft = value.data.draft)[0];
-                // const teams = value.data.teams;
+                const teams = value.data.teams;
                 const available_draft_runners = value.data.available_draft_runners
                 const picked_draft_runners = value.data.picked_draft_runners
                 // const runners = value.data.runners
@@ -56,7 +56,7 @@ export const DraftPickTable = () => {
                 const newDraftState = {
                     'season': season.id,
                     'draft': 1,
-                    'teams': [],
+                    'teams': teams,
                     'available_draft_runners': available_draft_runners,
                     'picked_draft_runners': picked_draft_runners,
                     'wait': 0
@@ -112,18 +112,14 @@ export const DraftPickTable = () => {
     const classes = useStyles();
 
     const PickButtonCell = (availableDraftRunner: AvailableDraftRunner) => {
-        return userState.loggedIn ?
-            (<TableCell className={classes.cell}>{
-                <Button variant={'contained'} color={'primary'}
-                        onClick={() => {
-                            submitPick(availableDraftRunner)
-                        }}
-                >Pick</Button>}</TableCell>) : (
-                <TableCell className={classes.cell}>{
-                    <Button variant={'contained'} color={'primary'} disabled
-                    >Pick</Button>}</TableCell>)
+        return (<TableCell className={classes.cell}>{
+            <Button variant={'contained'} color={'primary'}
+                    onClick={() => {
+                        submitPick(availableDraftRunner)
+                    }}
+            >Pick</Button>}</TableCell>)
     }
-    
+
     return (
         <div className={'draft-window'}>
             <TableContainer className={classes.table} component={Paper}>
