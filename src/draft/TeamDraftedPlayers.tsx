@@ -1,7 +1,7 @@
 import "../less/main.css";
 import "../bootstrap-5.1.0-dist/css/bootstrap.min.css";
 import {DataGrid} from '@mui/x-data-grid';
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,20 +33,39 @@ const useStyles = makeStyles({
 
 type Player = {
     team: string,
-    runnerTag: string
+    runnerTag: string,
     id: number
 }
 
 export const TeamDraftedPlayers = () => {
+    const [tables, setTables] = useState([]);
     const classes = useStyles();
+    const players: Player[][] = []
+    const getTeams = () => {
+        axios.get('http://backend.sm64fantasy.com/api/team/').then((response) => {
+                const teams = response.data;
+                let id = 0;
+                console.log(response.data)
 
-    const players: Player[][] = [
-        [
-            {id: 1, team: "bla", runnerTag: 'GTM'},
-            {id: 2, team: "bla", runnerTag: 'GTM2.0'}
-        ],
-    ]
-    const tables: ReactElement[] = [];
+                teams.forEach(
+                    (team: any) => {
+                        const roster = team.roster;
+                        let rosterToDisplay: Player[] = []
+                        roster.forEach((runner: any) => {
+                            let teamMember: Player = {id: id, team: team.name, runnerTag: runner.speedrun_name};
+                            rosterToDisplay.push(teamMember)
+                            id++
+                        });
+
+                        players.push(rosterToDisplay)
+                    }
+                )
+
+                playersInTeamTableCell();
+            }
+        )
+    }
+
 
     const playersInTeamTableCell = () => {
         players.forEach((player) => {
@@ -64,8 +83,9 @@ export const TeamDraftedPlayers = () => {
     (playersInTeamTableCell());
 
 
-    const useEffect = () => {
-    }
+    useEffect(() => {
+        getTeams();
+    }, [])
 
 
     return (

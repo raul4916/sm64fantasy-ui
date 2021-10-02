@@ -68,6 +68,9 @@ export const LoginComponent = () => {
                     updateLoginInfo(userInfo);
                     setAlert(false)
                     setSuccess(true)
+
+                    window.location.href = 'http://sm64fantasy.com';
+
                 }
             ).catch((error) => {
                 setAlert(true)
