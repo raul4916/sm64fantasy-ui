@@ -38,7 +38,7 @@ type Player = {
 }
 
 export const TeamDraftedPlayers = () => {
-    const [tables, setTables] = useState([]);
+    const [tables, setTables]: [ReactElement[], any] = useState([]);
     const classes = useStyles();
     const players: Player[][] = []
     const getTeams = () => {
@@ -68,8 +68,9 @@ export const TeamDraftedPlayers = () => {
 
 
     const playersInTeamTableCell = () => {
+        const prepTables: ReactElement[] = []
         players.forEach((player) => {
-                tables.push(
+                prepTables.push(
                     // @ts-ignore
                     <DataGrid className={classes.container} hideFooter={true}
                               columns={[{field: 'runnerTag', headerName: player[0].team, width: 200}]}
@@ -78,13 +79,14 @@ export const TeamDraftedPlayers = () => {
                 )
             }
         );
+        setTables(prepTables);
     }
-
-    (playersInTeamTableCell());
 
 
     useEffect(() => {
         getTeams();
+        (playersInTeamTableCell());
+
     }, [])
 
 

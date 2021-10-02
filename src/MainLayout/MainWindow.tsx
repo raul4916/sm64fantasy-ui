@@ -13,6 +13,8 @@ import {AddTeams} from "../internal_tool/AddingTeams";
 import {AddRunnerStat} from "../internal_tool/AddRunnerStat";
 import {State} from "../App";
 import {AddMembersToTeam} from "../internal_tool/AddingMembersToTeam";
+import {ContentRow} from "../content/ContentRow";
+import {TeamDraftedPlayers} from "../draft/TeamDraftedPlayers";
 
 export const MainWindow = () => {
 
@@ -52,16 +54,22 @@ export const MainWindow = () => {
 
     const internalTools = () => {
         return (
-            <Route path={"/internal-tools"}>
-                <div className={'dark-main-bg'}>
-                    <AddTeams/>
-                    <AddRunnerStat/>
-                    <AddMembersToTeam/>
-                </div>
-            </Route>
+            <div className={'dark-main-bg'}>
+                <AddTeams/>
+                <AddRunnerStat/>
+                <AddMembersToTeam/>
+            </div>
         )
     }
 
+    const teamRosterPage = () => {
+        return (
+            <div className={'dark-main-bg'}>
+                <div className={'dark-content-bg'}>
+                    <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
+                </div>
+            </div>)
+    }
     return (
         <div>
             <BrowserRouter>
@@ -74,6 +82,9 @@ export const MainWindow = () => {
                         <Route path={"/internal-tools"} component={internalTools}/>
                     }
                     <Route path={"/login"} component={loginComponent}/>
+                    <Route path={"/team"} component={teamRosterPage}/>
+
+
                 </Switch>
             </BrowserRouter>
         </div>
