@@ -1,18 +1,9 @@
-import "../less/main.css";
-import "../bootstrap-5.1.0-dist/css/bootstrap.min.css";
-import {DataGrid} from '@mui/x-data-grid';
-import React, {ReactElement, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {Button} from "@material-ui/core";
-import axios, {AxiosResponse} from "axios";
-import {ReactComponent} from "*.svg";
+import {DataGrid} from '@mui/x-data-grid';
+import axios from "axios";
+import React, {ReactElement, useEffect, useState} from 'react';
+import "../bootstrap-5.1.0-dist/css/bootstrap.min.css";
+import "../less/main.css";
 
 const useStyles = makeStyles({
     table: {

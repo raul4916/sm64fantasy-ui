@@ -1,14 +1,14 @@
-import {Component, ReactElement, useEffect, useState} from "react";
-import {Button, Input} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
-import {bindActionCreators, Dispatch} from "redux";
-import {loginUser} from "./redux/actionCreators";
-import axios from "axios";
-import Cookies from "universal-cookie";
+import {Button} from "@material-ui/core";
 import {Alert, AlertTitle} from '@material-ui/lab';
-import {UserState} from "./redux/UserReducer";
 import {AnyAction} from "@reduxjs/toolkit";
+import axios from "axios";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {bindActionCreators, Dispatch} from "redux";
+import Cookies from "universal-cookie";
 import {ContentRow} from "../content/ContentRow";
+import {loginUser} from "./redux/actionCreators";
+import {UserState} from "./redux/UserReducer";
 
 
 export const updateLoginInfo = (userInfo: { loginUser: (userState: UserState) => (dispatch: Dispatch<AnyAction>) => void }) => {

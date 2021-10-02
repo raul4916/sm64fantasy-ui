@@ -1,6 +1,4 @@
-import {Component} from "react";
 import "../less/main.css";
-import axios from "axios";
 
 type Props = {
     twitchLink: string;

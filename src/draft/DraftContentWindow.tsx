@@ -1,18 +1,16 @@
-import "../less/main.css";
+import axios, {AxiosResponse} from "axios";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {bindActionCreators} from "redux";
+import Cookies from "universal-cookie";
+import {State} from "../App";
 import '../bootstrap-5.1.0-dist/css/bootstrap.css'
 import {ContentRow} from "../content/ContentRow";
 import {DraftPickTable} from "../draft/DraftPickTable";
 import {DraftTable} from "../draft/DraftTable";
 import {TeamDraftedPlayers} from "../draft/TeamDraftedPlayers";
-import {useDispatch, useSelector} from "react-redux";
-import {State} from "../App";
-import {bindActionCreators} from "redux";
+import "../less/main.css";
 import {setDraftInfo} from "./redux/actionCreators";
-import {useEffect} from "react";
-import axios, {AxiosResponse} from "axios";
-import {UserUploader} from "../AddRunners";
-import {LoginComponent} from "../login/LoginComponent";
-import Cookies from "universal-cookie";
 
 export const DraftContentWindow = () => {
 

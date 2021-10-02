@@ -1,5 +1,3 @@
-import {AnyAction, configureStore, Reducer} from '@reduxjs/toolkit'
-
 const initialState: UserState = {
         role: '',
         username: '',

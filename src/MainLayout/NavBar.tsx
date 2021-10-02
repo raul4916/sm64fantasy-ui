@@ -1,8 +1,8 @@
-import {Component, CSSProperties} from "react";
-import "../less/main.css";
-import {Link} from "react-router-dom";
+import {CSSProperties} from "react";
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import {State} from "../App";
+import "../less/main.css";
 
 type Props = {
     styleChange: CSSProperties
@@ -43,13 +43,13 @@ export const NavBar = () => {
                 </Link>
             </li>
 
-            <li className="nav-item dark-btn">
-                <Link to={'/draft'} className={'text-decoration-none'}>
-                    <div className="text-white dark-btn" aria-current="page">
-                        Draft
-                    </div>
-                </Link>
-            </li>
+            {/*<li className="nav-item dark-btn">*/}
+            {/*    <Link to={'/draft'} className={'text-decoration-none'}>*/}
+            {/*        <div className="text-white dark-btn" aria-current="page">*/}
+            {/*            Draft*/}
+            {/*        </div>*/}
+            {/*    </Link>*/}
+            {/*</li>*/}
 
             <li className="nav-item dark-btn">
                 <Link to={'/teams'} className={'text-decoration-none'}>

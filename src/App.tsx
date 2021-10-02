@@ -1,14 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import './less/main.css'
-import './bootstrap-5.1.0-dist/css/bootstrap.css'
-import {MainWindow} from "./MainLayout/MainWindow";
+import {Provider} from "react-redux";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
-import {Provider} from "react-redux";
+import './App.css';
+import './bootstrap-5.1.0-dist/css/bootstrap.css'
 import {DraftReducer} from "./draft/redux/DraftReducer";
+import './less/main.css'
 import {UserReducer} from "./login/redux/UserReducer";
-import {BrowserRouter} from "react-router-dom";
+import {MainWindow} from "./MainLayout/MainWindow";
 
 const rootReducer = combineReducers(
     {draftReduce: DraftReducer, userReduce: UserReducer},

@@ -1,9 +1,8 @@
-import {ReactElement, useEffect, useState} from "react";
 import {Button} from "@material-ui/core";
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import Cookies from "universal-cookie";
+import {useState} from "react";
 import {useSelector} from "react-redux";
+import Cookies from "universal-cookie";
 import {State} from "./App";
 
 

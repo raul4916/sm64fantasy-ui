@@ -1,6 +1,6 @@
+import axios from "axios";
 import "../less/main.css";
 import {TwitchSidebarTab} from "../twitch/TwitchSidebarTab";
-import axios from "axios";
 
 type Props = {}
 
