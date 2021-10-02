@@ -94,7 +94,7 @@ export const TeamDraftedPlayers = () => {
         <div className={'flex-r justify-content-center m-2 flex-wrap'}>
             {
                 tables.map((table) => {
-                    return (<div className={'m-4'} style={{height: "400px", width: '250px'}}>
+                    return (<div className={'m-4'} style={{height: "550px", width: '250px'}}>
                         {table}
                     </div>)
                 })
