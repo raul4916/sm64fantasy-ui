@@ -47,7 +47,7 @@ export const AddRunnerStat = () => {
         if (pb.time === 0)
             return;
 
-        axios.post('http://backend.sm64fantasy.com/api/runner-stat/', pb).then(
+        axios.post('http://backend.sm64fantasy.com/api/runner-stats/', pb).then(
             (response) => {
                 setSuccess(true)
                 setTimeout(() => {
