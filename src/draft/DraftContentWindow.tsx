@@ -67,7 +67,7 @@ export const DraftContentWindow = () => {
     return (
         <div className={'dark-content-bg'}>
             {UserUploaderComp()}
-            {/*<ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>*/}
+            <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
             <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
             <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
         </div>
