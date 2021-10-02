@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 import {Alert, AlertTitle} from '@material-ui/lab';
 import {AnyAction} from "@reduxjs/toolkit";
 import {ContentRow} from "../content/ContentRow";
+import {get} from "http";
 
 export const AddTeams = () => {
 
@@ -14,6 +15,7 @@ export const AddTeams = () => {
     const [captain, setCaptain] = useState('');
     const [alert, setAlert] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [teamTable, setTeamTable] = useState((<div/>));
 
     const onTeamNameChange = (event: any) => {
         setTeamName(event.target.value);
@@ -22,6 +24,10 @@ export const AddTeams = () => {
         setCaptain(event.target.value);
     }
 
+
+    useEffect(() => {
+        getTeams();
+    }, [])
 
     const createTeam =
         () => {
@@ -35,10 +41,16 @@ export const AddTeams = () => {
 
             axios.post('http://backend.sm64fantasy.com/api/team/', teamData).then(
                 (response) => {
-
+                    setSuccess(true)
+                    setTimeout(() => {
+                        setSuccess(false)
+                    }, 2000)
                 }
             ).catch((error) => {
                 setAlert(true)
+                setTimeout(() => {
+                    setAlert(false)
+                }, 2000)
             });
         }
 
@@ -60,19 +72,35 @@ export const AddTeams = () => {
             {alert ? alertComponent : null}
             {success ? successComponent : null}
             <h3>Create Team:</h3>
-            <input className={"m-1"} type='text' onChange={onTeamNameChange} placeholder={'internal_tool Name'}
+            <input className={"m-1"} type='text' onChange={onTeamNameChange} placeholder={'Team Name'}
                    value={teamName}/>
             <input className={"m-1"} onChange={onCaptainChange} placeholder={'Captain src name'}
                    value={captain}/>
             <Button className={"w-25 m-1"} color={"primary"} variant='contained' onClick={
                 createTeam
             }>Create team</Button>
-
         </div>
     }
+
+    const getTeams = () => {
+        axios.get('http://backend.sm64fantasy.com/api/team/').then((response) => {
+            setTeamTable((
+                <td>
+                    {response.data.map((team: any) => {
+                        return (
+                            <tr>{team.name + '   |   ' + team.captain.speedrun_name}</tr>
+                        )
+                    })}
+                </td>
+            ))
+        })
+    }
+
+
     return (
         <div className={'dark-content-bg'}>
             <ContentRow components={[createTeamComponent()]} title={''}/>
+            <ContentRow components={[teamTable]} title={''}/>
         </div>
     )
 }

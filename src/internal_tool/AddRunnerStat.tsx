@@ -48,10 +48,17 @@ export const AddRunnerStat = () => {
 
         axios.post('http://backend.sm64fantasy.com/api/draftrunner/', pb).then(
             (response) => {
-
+                setSuccess(true)
+                setTimeout(() => {
+                    setSuccess(false)
+                }, 2000)
             }
         ).catch((error) => {
             setAlert(true)
+            setTimeout(() => {
+                setAlert(false)
+            }, 2000)
+
         });
     }
     const createRunnerStats =
@@ -99,12 +106,16 @@ export const AddRunnerStat = () => {
             {alert ? alertComponent : null}
             {success ? successComponent : null}
             <h3>Runner Stats</h3>
+            <h6>Runner Name</h6>
             <input className={"m-1"} type='text' onChange={onUsername} placeholder={'Runner name'}
                    value={username}/>
+            <h6>PB16</h6>
             <input className={"m-1"} onChange={onPB16Change} placeholder={'1:23:45'}
                    value={pb16}/>
+            <h6>PB70</h6>
             <input className={"m-1"} onChange={onPB70Change} placeholder={'1:23:45'}
                    value={pb70}/>
+            <h6>PB120</h6>
             <input className={"m-1"} onChange={onPB120Change} placeholder={'1:23:45'}
                    value={pb120}/>
 

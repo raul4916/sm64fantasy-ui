@@ -28,7 +28,7 @@ export const DraftContentWindow = () => {
 
                 const season = value.data.season;
                 // const draft = value.data.draft)[0];
-                // const teams = value.data.teams;
+                const teams = value.data.teams;
                 const available_draft_runners = value.data.available_draft_runners
                 const picked_draft_runners = value.data.picked_draft_runners
                 // const runners = value.data.runners
@@ -37,7 +37,7 @@ export const DraftContentWindow = () => {
                 const newDraftState = {
                     'season': 1,
                     'draft': 1,
-                    'teams': [],
+                    'teams': teams,
                     'available_draft_runners': available_draft_runners,
                     'picked_draft_runners': picked_draft_runners,
                     'wait': state.wait
@@ -54,7 +54,10 @@ export const DraftContentWindow = () => {
     }
 
     useEffect(() => {
-            getCurrentPicks('true')
+            getCurrentPicks()
+            if (userState.isStaff) {
+                getCurrentPicks('true')
+            }
             setInterval(getCurrentPicks, 3000)
         }, []
     )
