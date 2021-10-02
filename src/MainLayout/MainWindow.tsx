@@ -3,7 +3,7 @@ import "../less/main.css";
 import {TwitchSidebar} from "./TwitchSidebar";
 import {NavBar} from "./NavBar";
 import {DraftContentWindow} from "../draft/DraftContentWindow";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {loginUser} from "../login/redux/actionCreators";
 import {LoginComponent, updateLoginInfo} from "../login/LoginComponent";
@@ -11,12 +11,13 @@ import {ContentWindow} from "./ContentWindow";
 import {Router, Route, Link, Switch, BrowserRouter} from "react-router-dom";
 import {AddTeams} from "../internal_tool/AddingTeams";
 import {AddRunnerStat} from "../internal_tool/AddRunnerStat";
+import {State} from "../App";
 
 export const MainWindow = () => {
 
     const dispatch = useDispatch();
     const userInfo = bindActionCreators({loginUser}, dispatch)
-
+    const userState = useSelector((state: State) => state.userReduce)
 
     useEffect(() => {
         updateLoginInfo(userInfo);
@@ -66,7 +67,10 @@ export const MainWindow = () => {
                 <Switch>
                     <Route path={"/"} exact component={twitchWindowRoute}/>
                     <Route path={"/draft/"} component={draftWindowRoute}/>
-                    <Route path={"/internal-tools"} component={internalTools}/>
+                    {userState.isStaff ?
+                        <Route path={"/internal-tools"} component={internalTools}/> :
+                        null
+                    }
                     <Route path={"/login"} component={loginComponent}/>
                 </Switch>
             </BrowserRouter>

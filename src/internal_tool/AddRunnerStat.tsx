@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 import {Alert, AlertTitle} from '@material-ui/lab';
 import {AnyAction} from "@reduxjs/toolkit";
 import {ContentRow} from "../content/ContentRow";
+import {UserUploader} from "../AddRunners";
 
 export const AddRunnerStat = () => {
 
@@ -46,7 +47,7 @@ export const AddRunnerStat = () => {
         if (pb.time === 0)
             return;
 
-        axios.post('http://backend.sm64fantasy.com/api/draftrunner/', pb).then(
+        axios.post('http://backend.sm64fantasy.com/api/runner-stat/', pb).then(
             (response) => {
                 setSuccess(true)
                 setTimeout(() => {
@@ -125,9 +126,14 @@ export const AddRunnerStat = () => {
 
         </div>
     }
+    const UserUploaderComp = () => {
+        return (<ContentRow title="Fetch SR.com Users" components={[<UserUploader/>]}/>)
+    }
+
     return (
         <div className={'dark-content-bg'}>
-            <ContentRow components={[createRunnerStatsComponent()]} title={''}/>
+            {UserUploaderComp()}
+            <ContentRow components={[createRunnerStatsComponent()]} title={'Add Runner PBs'}/>
         </div>
     )
 }

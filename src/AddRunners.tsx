@@ -136,9 +136,9 @@ export const UserUploader = () => {
     const addRunnersComponent =
         <div className={'flex-c justify-content-start m-1 '}>
             <input type={'text'} name={'players'} value={playersToAdd} onChange={onChange}
-                   placeholder={'Enter SC.com players name like: "ringo792, __GTM..."'}/>
-            <Button variant={'contained'} color={'primary'} onClick={upload}>UPLOAD</Button>
-            <Button variant={'contained'} color={'primary'}>drafter</Button>
+                   placeholder={'Enter SR.com players name like: "ringo792, __GTM..."'}/>
+            <Button variant={'contained'} color={'primary'} onClick={upload}>Fetch SR.com</Button>
+            <Button variant={'contained'} color={'primary'}>Add Runner To Draft</Button>
         </div>
 
     return (addRunnersComponent)

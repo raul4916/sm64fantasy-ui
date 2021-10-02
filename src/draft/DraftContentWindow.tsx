@@ -62,14 +62,8 @@ export const DraftContentWindow = () => {
         }, []
     )
 
-    const UserUploaderComp = () => {
-        return userState.isStaff ?
-            (<ContentRow title="UserUploader" components={[<UserUploader/>]}/>) : null
-    }
-
     return (
         <div className={'dark-content-bg'}>
-            {UserUploaderComp()}
             <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
             <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
             <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
