@@ -15,7 +15,7 @@ export const updateLoginInfo = (userInfo: { loginUser: (userState: UserState) =>
     const cookies = new Cookies()
     const config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
 
-    axios.get("http://backend.sm64fantasy.com/api/user-public-info?username=" + cookies.get('username'), config).then(
+    axios.get("https://backend.sm64fantasy.com/api/user-public-info?username=" + cookies.get('username'), config).then(
         (response) => {
             userInfo.loginUser({
                 role: 'captain',
@@ -56,7 +56,7 @@ export const LoginComponent = () => {
 
     const submitCredentials =
         () => {
-            axios.post('http://backend.sm64fantasy.com/api-token-auth/', {
+            axios.post('https://backend.sm64fantasy.com/api-token-auth/', {
                 'username': username,
                 'password': password
             }).then(
@@ -69,7 +69,7 @@ export const LoginComponent = () => {
                     setAlert(false)
                     setSuccess(true)
 
-                    window.location.href = 'http://sm64fantasy.com';
+                    window.location.href = 'https://sm64fantasy.com';
 
                 }
             ).catch((error) => {
@@ -79,7 +79,7 @@ export const LoginComponent = () => {
 
     const createUser =
         () => {
-            axios.post('http://backend.sm64fantasy.com/api/user-public-info', {
+            axios.post('https://backend.sm64fantasy.com/api/user-public-info', {
                 'username': username,
                 'password': password
             })

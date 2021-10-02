@@ -46,7 +46,7 @@ export const DraftTable = () => {
     const cookies = new Cookies();
     const revertPick = (pickedDraftRunner: PickedDraftRunner) => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
-        axios.put("http://backend.sm64fantasy.com/api/draft-runners/" + pickedDraftRunner.id + "/", {
+        axios.put("https://backend.sm64fantasy.com/api/draft-runners/" + pickedDraftRunner.id + "/", {
             "draft_type": pickedDraftRunner.draft_type,
             "draft_status": "available",
             "description": pickedDraftRunner.description,

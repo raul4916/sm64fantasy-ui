@@ -24,7 +24,7 @@ export const DraftContentWindow = () => {
     const cookies = new Cookies();
     const getCurrentPicks = (update = 'false') => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
-        axios.get('http://backend.sm64fantasy.com/api/get-draft-info?season_id=1&update=' + update).then((value: AxiosResponse<any>) => {
+        axios.get('https://backend.sm64fantasy.com/api/get-draft-info?season_id=1&update=' + update).then((value: AxiosResponse<any>) => {
 
                 const season = value.data.season;
                 // const draft = value.data.draft)[0];

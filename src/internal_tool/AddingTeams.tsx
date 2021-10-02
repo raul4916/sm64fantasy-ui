@@ -39,7 +39,7 @@ export const AddTeams = () => {
                 captain: captain,
             }
 
-            axios.post('http://backend.sm64fantasy.com/api/team/', teamData).then(
+            axios.post('https://backend.sm64fantasy.com/api/team/', teamData).then(
                 (response) => {
                     setSuccess(true)
                     setTimeout(() => {
@@ -83,7 +83,7 @@ export const AddTeams = () => {
     }
 
     const getTeams = () => {
-        axios.get('http://backend.sm64fantasy.com/api/team/').then((response) => {
+        axios.get('https://backend.sm64fantasy.com/api/team/').then((response) => {
             setTeamTable((
                 <td>
                     {response.data.map((team: any) => {

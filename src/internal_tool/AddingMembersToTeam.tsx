@@ -41,7 +41,7 @@ export const AddMembersToTeam = () => {
                     speedrun_name: member
                 }
 
-                axios.put('http://backend.sm64fantasy.com/api/team/', teamData).then(
+                axios.put('https://backend.sm64fantasy.com/api/team/', teamData).then(
                     (response) => {
                         setSuccess(true)
                         setTimeout(() => {
@@ -85,7 +85,7 @@ export const AddMembersToTeam = () => {
     }
 
     const getTeams = () => {
-        axios.get('http://backend.sm64fantasy.com/api/team/').then((response) => {
+        axios.get('https://backend.sm64fantasy.com/api/team/').then((response) => {
             setTeamInput((
                 <Select type={'select'} className={'bg-white w-75'} onChange={onTeamNameChange}>
                     {response.data.map((team: any) => {

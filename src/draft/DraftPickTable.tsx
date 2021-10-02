@@ -43,7 +43,7 @@ export const DraftPickTable = () => {
     const cookies = new Cookies();
     const getCurrentPicks = () => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
-        axios.put('http://backend.sm64fantasy.com/api/get-draft-info?season_id=1', draftState, config).then((value: AxiosResponse<any>) => {
+        axios.put('https://backend.sm64fantasy.com/api/get-draft-info?season_id=1', draftState, config).then((value: AxiosResponse<any>) => {
 
                 const season = value.data.season;
                 // const draft = value.data.draft)[0];
@@ -69,7 +69,7 @@ export const DraftPickTable = () => {
             console.log(error)
         })
 
-        // console.log('http://backend.sm64fantasy.com/', {capt: 'gtm', pick: row});
+        // console.log('https://backend.sm64fantasy.com/', {capt: 'gtm', pick: row});
     }
 
     const uiUpdatePicks = (playerId: number, team: string) => {
@@ -89,7 +89,7 @@ export const DraftPickTable = () => {
 
         uiUpdatePicks(availRunner.id, availRunner.team);
 
-        axios.put("http://backend.sm64fantasy.com/api/draft-runners/" + availRunner.id + "/", {
+        axios.put("https://backend.sm64fantasy.com/api/draft-runners/" + availRunner.id + "/", {
             "draft_type": availRunner.draft_type,
             "draft_status": "picked",
             "description": availRunner.description,
@@ -123,7 +123,7 @@ export const DraftPickTable = () => {
                     <Button variant={'contained'} color={'primary'} disabled
                     >Pick</Button>}</TableCell>)
     }
-    
+
     return (
         <div className={'draft-window'}>
             <TableContainer className={classes.table} component={Paper}>

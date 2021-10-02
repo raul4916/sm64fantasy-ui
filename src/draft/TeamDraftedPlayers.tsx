@@ -42,7 +42,7 @@ export const TeamDraftedPlayers = () => {
     const classes = useStyles();
     const players: Player[][] = []
     const getTeams = () => {
-        axios.get('http://backend.sm64fantasy.com/api/team/').then((response) => {
+        axios.get('https://backend.sm64fantasy.com/api/team/').then((response) => {
                 const teams = response.data;
                 let id = 0;
                 console.log(response.data)
