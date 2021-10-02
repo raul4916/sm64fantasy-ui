@@ -59,8 +59,8 @@ export const NavBar = () => {
                 </Link>
             </li>
 
-            {internalTools}
             {userState.loggedIn ? userInfoNavBar : loginLink}
+            {userState.isStaff ? internalTools : null}
         </ul>
     );
 }

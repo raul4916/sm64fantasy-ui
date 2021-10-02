@@ -78,9 +78,7 @@ export const MainWindow = () => {
                     <Route path={"/"} exact component={twitchWindowRoute}/>
                     <Route path={"/draft/"} component={draftWindowRoute}/>
                     {userState.isStaff ?
-                        <Route path={"/internal-tools"} component={internalTools}/> :
-                        <Route path={"/internal-tools"} component={internalTools}/>
-                    }
+                        <Route path={"/internal-tools"} component={internalTools}/> : null}
                     <Route path={"/login"} component={loginComponent}/>
                     <Route path={"/teams"} component={teamRosterPage}/>
 
