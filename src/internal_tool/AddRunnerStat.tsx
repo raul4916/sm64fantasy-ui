@@ -68,19 +68,19 @@ export const AddRunnerStat = () => {
             const pbs = {
                 pb16: {
                     "type": "pb16",
-                    "runner_name": username,
+                    "runner": username,
                     "time": convertToSeconds(pb16),
                     "status": "verified"
                 },
                 pb70: {
                     "type": "pb70",
-                    "runner_name": username,
+                    "runner": username,
                     "time": convertToSeconds(pb70),
                     "status": "verified"
                 },
                 pb120: {
                     "type": "pb120",
-                    "runner_name": username,
+                    "runner": username,
                     "time": convertToSeconds(pb120),
                     "status": "verified"
                 },
