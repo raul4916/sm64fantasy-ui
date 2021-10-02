@@ -82,7 +82,7 @@ export const MainWindow = () => {
                         <Route path={"/internal-tools"} component={internalTools}/>
                     }
                     <Route path={"/login"} component={loginComponent}/>
-                    <Route path={"/team"} component={teamRosterPage}/>
+                    <Route path={"/teams"} component={teamRosterPage}/>
 
 
                 </Switch>

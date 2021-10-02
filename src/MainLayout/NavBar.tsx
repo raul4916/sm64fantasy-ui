@@ -51,6 +51,14 @@ export const NavBar = () => {
                 </Link>
             </li>
 
+            <li className="nav-item dark-btn">
+                <Link to={'/teams'} className={'text-decoration-none'}>
+                    <div className="text-white dark-btn" aria-current="page">
+                        Teams
+                    </div>
+                </Link>
+            </li>
+
             {internalTools}
             {userState.loggedIn ? userInfoNavBar : loginLink}
         </ul>
