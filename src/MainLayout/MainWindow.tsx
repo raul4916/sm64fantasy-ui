@@ -12,6 +12,7 @@ import {Router, Route, Link, Switch, BrowserRouter} from "react-router-dom";
 import {AddTeams} from "../internal_tool/AddingTeams";
 import {AddRunnerStat} from "../internal_tool/AddRunnerStat";
 import {State} from "../App";
+import {AddMembersToTeam} from "../internal_tool/AddingMembersToTeam";
 
 export const MainWindow = () => {
 
@@ -21,7 +22,7 @@ export const MainWindow = () => {
 
     useEffect(() => {
         updateLoginInfo(userInfo);
-    })
+    }, [])
 
     const draftWindowRoute = () => {
         return (
@@ -55,6 +56,7 @@ export const MainWindow = () => {
                 <div className={'dark-main-bg'}>
                     <AddTeams/>
                     <AddRunnerStat/>
+                    <AddMembersToTeam/>
                 </div>
             </Route>
         )
@@ -69,7 +71,7 @@ export const MainWindow = () => {
                     <Route path={"/draft/"} component={draftWindowRoute}/>
                     {userState.isStaff ?
                         <Route path={"/internal-tools"} component={internalTools}/> :
-                        null
+                        <Route path={"/internal-tools"} component={internalTools}/>
                     }
                     <Route path={"/login"} component={loginComponent}/>
                 </Switch>
