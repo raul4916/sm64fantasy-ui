@@ -55,12 +55,13 @@ export default function MenuDrawer() {
     };
 
     const loginLink = (
-        <ListItem button key={'teams'}>
-            <ListItemIcon></ListItemIcon>
-            <Link href={'/login'} color="inherit" className={'text-decoration-none'}>
+        <Link href={'/login'} color="inherit" className={'text-decoration-none'}>
+            <ListItem button key={'teams'}>
+                <ListItemIcon></ListItemIcon>
                 <ListItemText primary={"Login"}/>
-            </Link>
-        </ListItem>
+            </ListItem>
+        </Link>
+
     )
 
     const list = (anchor: Anchor) => (
@@ -71,18 +72,19 @@ export default function MenuDrawer() {
                 onKeyDown={toggleDrawer(anchor, false)}
             >
                 <List>
-                    <ListItem button key={'teams'}>
-                        <ListItemIcon></ListItemIcon>
-                        <Link href={'/'} color={"inherit"} className={'text-decoration-none'}>
+                    <Link href={'/'} color={"inherit"} className={'text-decoration-none'}>
+                        <ListItem button key={'teams'}>
+                            <ListItemIcon></ListItemIcon>
                             <ListItemText className={'text-decoration-none'} primary={'Home'}/>
-                        </Link>
-                    </ListItem>
-                    <ListItem button key={'teams'}>
-                        <ListItemIcon></ListItemIcon>
-                        <Link href={'/teams'} color={"inherit"} className={'text-decoration-none'}>
+                        </ListItem>
+                    </Link>
+                    <Link href={'/teams'} color={"inherit"} className={'text-decoration-none'}>
+                        <ListItem button key={'teams'}>
+                            <ListItemIcon></ListItemIcon>
                             <ListItemText className={'text-decoration-none'} primary={'Teams'}/>
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
+
                     {!userState.loggedIn ? loginLink : null}
                 </List>
             </div>

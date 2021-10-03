@@ -100,11 +100,12 @@ export default function MenuAppBar() {
                         >
 
                             {userState.loggedIn ? menuItems :
-                                <MenuItem onClick={handleClose}>
-                                    <Link href={"/login"} color={'inherit'}>
+                                <Link href={"/login"} color={'inherit'}>
+                                    <MenuItem onClick={handleClose}>
                                         Login
-                                    </Link>
-                                </MenuItem>
+                                    </MenuItem>
+                                </Link>
+
                             }
                             {userState.isStaff ? internalTools : null}
                         </Menu>
