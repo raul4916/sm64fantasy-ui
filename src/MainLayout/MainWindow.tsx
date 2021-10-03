@@ -14,6 +14,7 @@ import {LoginComponent, updateLoginInfo} from "../login/LoginComponent";
 import {loginUser} from "../login/redux/actionCreators";
 import {ContentWindow} from "./ContentWindow";
 import {NavBar} from "./NavBar";
+import MenuAppBar from "./NavBarModern";
 import {TwitchSidebar} from "./TwitchSidebar";
 
 export const MainWindow = () => {
@@ -73,7 +74,7 @@ export const MainWindow = () => {
     return (
         <div>
             <BrowserRouter>
-                <NavBar/>
+                <MenuAppBar/>
                 <Switch>
                     <Route path={"/"} exact component={twitchWindowRoute}/>
                     <Route path={"/draft/"} component={draftWindowRoute}/>

@@ -33,7 +33,7 @@ export const NavBar = () => {
 
 
     return (
-        <ul className="nav navbar nav-justified color-check">
+        <ul className="nav navbar nav-justified navbar-color">
 
             <li className="nav-item dark-btn">
                 <Link to={'/'} className={'text-decoration-none'}>
@@ -58,9 +58,11 @@ export const NavBar = () => {
                     </div>
                 </Link>
             </li>
-
-            {userState.loggedIn ? userInfoNavBar : loginLink}
             {userState.isStaff ? internalTools : null}
+            <li className={'dark-btn'}>
+                {userState.loggedIn ? userInfoNavBar : loginLink}
+            </li>
+
         </ul>
     );
 }
