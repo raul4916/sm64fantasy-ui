@@ -1,4 +1,5 @@
-import {Link, SwipeableDrawer} from "@material-ui/core";
+import {IconButton, SwipeableDrawer, Typography} from "@material-ui/core";
+import {Link} from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import React from 'react';
 import clsx from 'clsx';
@@ -19,8 +20,9 @@ const useStyles = makeStyles({
         width: "20rem",
         height: "100vh",
         backgroundColor: "#282c34",
-        color: "white"
+        color: "white",
     },
+    link: {},
     fullList: {
         width: 'auto',
     },
@@ -55,7 +57,7 @@ export default function MenuDrawer() {
     };
 
     const loginLink = (
-        <Link href={'/login'} color="inherit" className={'text-decoration-none'}>
+        <Link to={'/login'} className={'text-decoration-none text-white'}>
             <ListItem button key={'teams'}>
                 <ListItemIcon></ListItemIcon>
                 <ListItemText primary={"Login"}/>
@@ -72,13 +74,13 @@ export default function MenuDrawer() {
                 onKeyDown={toggleDrawer(anchor, false)}
             >
                 <List>
-                    <Link href={'/'} color={"inherit"} className={'text-decoration-none'}>
+                    <Link to={'/'} className={'text-decoration-none text-white'}>
                         <ListItem button key={'teams'}>
                             <ListItemIcon></ListItemIcon>
                             <ListItemText className={'text-decoration-none'} primary={'Home'}/>
                         </ListItem>
                     </Link>
-                    <Link href={'/teams'} color={"inherit"} className={'text-decoration-none'}>
+                    <Link to={'/teams'} className={'text-decoration-none text-white'}>
                         <ListItem button key={'teams'}>
                             <ListItemIcon></ListItemIcon>
                             <ListItemText className={'text-decoration-none'} primary={'Teams'}/>
@@ -95,7 +97,10 @@ export default function MenuDrawer() {
         <div>
             {(['left'] as Anchor[]).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <MenuIcon onClick={toggleDrawer(anchor, true)}/>
+                    <IconButton onClick={toggleDrawer(anchor, true)} edge="start"
+                                color="inherit" aria-label="menu">
+                        <MenuIcon/>
+                    </IconButton>
                     <SwipeableDrawer
                         anchor={anchor}
                         open={state[anchor]}
