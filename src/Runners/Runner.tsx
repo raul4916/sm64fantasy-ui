@@ -12,7 +12,7 @@ import {RunnerStatsCharts} from "./RunnerStatsCharts";
 export const Runner = (props: any) => {
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/runner?name=' + props.runnerName).then((response: AxiosResponse) => {
+        axios.get('https://backend.sm64fantasy.com/api/runner?name=' + props.runnerName).then((response: AxiosResponse) => {
             const runner = response.data
 
             const runnerPersonalBest: RunnerPersonalBest = runner.runner_personal_best
