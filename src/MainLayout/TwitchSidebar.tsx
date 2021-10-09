@@ -6,12 +6,6 @@ type Props = {}
 
 export const TwitchSidebar = (props: Props) => {
 
-    const getTwitchInfo = () => {
-        axios.get('api.twitch.tv').then((respone) => {
-
-        })
-    }
-
     return (
         <div className={'dark-sidebar flex-column'}>
             <TwitchSidebarTab/>

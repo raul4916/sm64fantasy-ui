@@ -7,7 +7,7 @@ import {State} from "../App";
 import '../bootstrap-5.1.0-dist/css/bootstrap.css'
 import {ContentRow} from "../content/ContentRow";
 import {DraftPickTable} from "../draft/DraftPickTable";
-import {DraftTable} from "../draft/DraftTable";
+import {RunnersTable} from "./RunnersTable";
 import {TeamDraftedPlayers} from "../draft/TeamDraftedPlayers";
 import "../less/main.css";
 import {setDraftInfo} from "./redux/actionCreators";
@@ -20,8 +20,10 @@ export const DraftContentWindow = () => {
     const draftInfo = bindActionCreators({setDraftInfo}, dispatch)
 
     const cookies = new Cookies();
+
     const getCurrentPicks = (update = 'false') => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
+
         axios.get('https://backend.sm64fantasy.com/api/get-draft-info?season_id=1&update=' + update).then((value: AxiosResponse<any>) => {
 
                 const season = value.data.season;
@@ -63,7 +65,7 @@ export const DraftContentWindow = () => {
     return (
         <div className={'dark-content-bg'}>
             <ContentRow title="Teams:" components={[<TeamDraftedPlayers/>]}/>
-            <ContentRow title="Selected Runners:" components={[<DraftTable/>]}/>
+            <ContentRow title="Selected Runners:" components={[<RunnersTable/>]}/>
             <ContentRow title="Draft Picks:" components={[<DraftPickTable/>]}/>
         </div>
     )

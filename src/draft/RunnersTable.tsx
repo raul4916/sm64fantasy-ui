@@ -8,12 +8,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import axios from "axios";
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import Cookies from "universal-cookie";
 import {State} from "../App";
 import "../bootstrap-5.1.0-dist/css/bootstrap.min.css";
 import "../less/main.css";
+import {DraftContentWindow} from "./DraftContentWindow";
+import {DraftPickTable} from "./DraftPickTable";
 import {PickedDraftRunner} from "./redux/DraftReducer";
 
 
@@ -37,11 +39,13 @@ const useStyles = makeStyles({
 });
 
 
-export const DraftTable = () => {
+export const RunnersTable = () => {
 
     const classes = useStyles();
 
     const draftState = useSelector((state: State) => state.draftReduce)
+    const userState = useSelector((state: State) => state.userReduce)
+
     const cookies = new Cookies();
     const revertPick = (pickedDraftRunner: PickedDraftRunner) => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
@@ -83,13 +87,18 @@ export const DraftTable = () => {
                             <TableCell className={classes.cell}>{pickedDraftRunner.runner.runner_stat.pb70}</TableCell>
                             <TableCell className={classes.cell}>{pickedDraftRunner.runner.runner_stat.pb120}</TableCell>
                             <TableCell className={classes.cell}>{pickedDraftRunner.team}</TableCell>
-                            <TableCell className={classes.cell} align={'center'}>{
-                                <Button variant={'contained'} color={'primary'}
-                                        onClick={() => {
-                                            revertPick(pickedDraftRunner)
-                                        }}
-                                >Pick</Button>}
-                            </TableCell>
+
+                            {
+                                userState.isStaff ? (
+                                        <TableCell className={classes.cell} align={'center'}>{
+                                            <Button variant={'contained'} color={'primary'}
+                                                    onClick={() => {
+                                                        revertPick(pickedDraftRunner)
+                                                    }}
+                                            >Pick</Button>}
+                                        </TableCell>) :
+                                    null
+                            }
                         </TableRow>
                     ))}
                 </TableBody>

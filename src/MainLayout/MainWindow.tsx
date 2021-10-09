@@ -1,7 +1,9 @@
+import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {bindActionCreators} from "redux";
+import Cookies from "universal-cookie";
 import {State} from "../App";
 import {ContentRow} from "../content/ContentRow";
 import {DraftContentWindow} from "../draft/DraftContentWindow";
@@ -12,8 +14,8 @@ import {AddRunnerStat} from "../internal_tool/AddRunnerStat";
 import "../less/main.css";
 import {LoginComponent, updateLoginInfo} from "../login/LoginComponent";
 import {loginUser} from "../login/redux/actionCreators";
+import {Runner} from "../Runners/Runner";
 import {ContentWindow} from "./ContentWindow";
-import {NavBar} from "./NavBar";
 import MenuAppBar from "./NavBarModern";
 import {TwitchSidebar} from "./TwitchSidebar";
 
@@ -25,6 +27,7 @@ export const MainWindow = () => {
 
     useEffect(() => {
         updateLoginInfo(userInfo);
+
     }, [])
 
     const draftWindowRoute = () => {
@@ -71,6 +74,14 @@ export const MainWindow = () => {
                 </div>
             </div>)
     }
+
+    const runnerPage = (props: any) => {
+        return (
+            <div className={'dark-main-bg'}>
+                <Runner runnerName={props.match.params.runnerName} title={"Runner"}/>
+            </div>)
+    }
+
     return (
         <div>
             <BrowserRouter>
@@ -83,6 +94,7 @@ export const MainWindow = () => {
                         : null}
                     <Route path={"/login"} component={loginComponent}/>
                     <Route path={"/teams"} component={teamRosterPage}/>
+                    <Route path={"/runner/:runnerName"} exact component={runnerPage}/>
                 </Switch>
             </BrowserRouter>
         </div>

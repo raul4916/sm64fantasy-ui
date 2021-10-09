@@ -2,7 +2,8 @@ import {Button} from "@material-ui/core";
 import {Alert, AlertTitle} from '@material-ui/lab';
 import axios from "axios";
 import {useState} from "react";
-import {UserUploader} from "../AddRunners";
+import {UserUploaderTemp} from "../Runners/AddRunnersTemp";
+import {UserUploader} from "./AddRunners";
 import {ContentRow} from "../content/ContentRow";
 
 export const AddRunnerStat = () => {
@@ -129,6 +130,7 @@ export const AddRunnerStat = () => {
     return (
         <div className={'dark-content-bg'}>
             {UserUploaderComp()}
+            <UserUploaderTemp/>
             <ContentRow components={[createRunnerStatsComponent()]} title={'Add Runner PBs'}/>
         </div>
     )

@@ -32,10 +32,10 @@ export type Runner = {
     "speedrun_link": string,
     "speedrun_name": string,
     "speedrun_api_link": string
-    runner_stat: RunnerStat
+    runner_stat: RunnerPersonalBest
 }
 
-export type RunnerStat = {
+export type RunnerPersonalBest = {
     pb16: string
     pb70: string
     pb120: string
@@ -49,7 +49,7 @@ export interface AvailableDraftRunner {
     draft_type: string
     order_drafted: number
     runner: Runner
-    runner_stat: RunnerStat
+    runner_stat: RunnerPersonalBest
     team: string
 }
 

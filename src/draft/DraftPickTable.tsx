@@ -40,7 +40,7 @@ export const DraftPickTable = () => {
     const dispatch = useDispatch();
     const draftInfo = bindActionCreators({setDraftInfo}, dispatch)
     const cookies = new Cookies();
-    const getCurrentPicks = () => {
+    const updateCurrentPicks = () => {
         let config = {headers: {'Authorization': 'JWT ' + cookies.get('token')}}
         axios.put('https://backend.sm64fantasy.com/api/get-draft-info?season_id=1', draftState, config).then((value: AxiosResponse<any>) => {
 
@@ -77,7 +77,6 @@ export const DraftPickTable = () => {
                 draftState.available_draft_runners.splice(index, 1)
                 draftState.picked_draft_runners.push({...runner, draft_status: "picked"})
                 console.log(draftState.picked_draft_runners)
-                const newDraftState = {...draftState}
                 draftInfo.setDraftInfo({...draftState})
             }
         })
@@ -96,7 +95,7 @@ export const DraftPickTable = () => {
             "runner": availRunner.runner.id,
             "draft": availRunner.draft,
         }, config).then((response) => {
-            getCurrentPicks()
+            updateCurrentPicks()
         }).catch(
             (error) => {
                 console.log(error)

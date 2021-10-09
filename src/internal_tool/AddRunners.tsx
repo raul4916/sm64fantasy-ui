@@ -3,7 +3,7 @@ import axios from "axios";
 import {useState} from "react";
 import {useSelector} from "react-redux";
 import Cookies from "universal-cookie";
-import {State} from "./App";
+import {State} from "../App";
 
 
 const setupRunnerStat = (player: string, config: any) => {
@@ -28,6 +28,7 @@ const setupRunnerStat = (player: string, config: any) => {
                     if (personalBest.run.category === 'n2y55mko') {
                         pb = {time: personalBest.run.times.primary_t, category: 'pb16'}
                     }
+
                     if (pb.category !== 'unknown') {
                         let requestData = {
                             "type": pb.category,
@@ -110,7 +111,6 @@ export const UserUploader = () => {
 
                                 console.log(playerInfo);
                                 axios.post('https://backend.sm64fantasy.com/api/runner', playerInfo, config).then(response => {
-                                    setupRunnerStat(player, config)
                                 }).catch((error) => {
                                     console.log(error);
                                 })
@@ -128,9 +128,6 @@ export const UserUploader = () => {
             }
         )
     }
-
-    const userState = useSelector((state: State) => state.userReduce)
-
 
     const addRunnersComponent =
         <div className={'flex-c justify-content-start m-1 '}>
