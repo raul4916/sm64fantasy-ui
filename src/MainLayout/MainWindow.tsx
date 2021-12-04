@@ -42,7 +42,7 @@ export const MainWindow = () => {
     const twitchWindowRoute = () => {
         return (
             <div className={'dark-main-bg'}>
-                <TwitchSidebar/>
+                {/*<TwitchSidebar/>*/}
                 <ContentWindow/>
             </div>
         )
