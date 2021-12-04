@@ -78,10 +78,22 @@ export const CategoryPointStandings = () => {
                 )
             })
 
+            prepRunnerStats.sort((a,b)=>{
+                return b.totalPoints - a.totalPoints;
+            })
+
+            i = 1;
+            const properIdOrder = []
+            prepRunnerStats.forEach((runnerStats)=>{
+                runnerStats.id= i++;
+                properIdOrder.push(runnerStats)
+            })
+
             setDataGrid(
-                <DataGrid className={classes.container} hideFooter={true}
+                <DataGrid className={classes.container}
                           columns={
                               [
+                                  {field: 'id', headerName: 'Rank', width: 200},
                                   {field: 'runnerSpeedrunName', headerName: 'Runner tag', width: 200},
                                   {field: 'totalPoints', headerName: 'Total Points', width: 200},
                                   {field: 'pb16', headerName: '16 Star - Points', width: 200},
