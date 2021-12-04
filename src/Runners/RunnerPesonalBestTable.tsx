@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 
-export const RunnerPesonalBestTable = (runnerPersonalBest: { runnerPersonalBest: RunnerPersonalBest }) => {
+export const RunnerPesonalBestTable = (runnerStats: { runnerPersonalBest: RunnerPersonalBest, runnerPoints: RunnerPersonalBest }) => {
     const classes = useStyles()
 
     return (
@@ -41,6 +41,8 @@ export const RunnerPesonalBestTable = (runnerPersonalBest: { runnerPersonalBest:
                           }
                       ]
                   }
-                  rows={[{...runnerPersonalBest.runnerPersonalBest, id: 1}]}/>
+                  rows={[{...runnerStats.runnerPersonalBest, id: 1},
+                      {... runnerStats.runnerPoints, id: 2}]}
+        />
     )
 }

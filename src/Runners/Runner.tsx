@@ -19,7 +19,8 @@ export const Runner = (props: any) => {
             const runnerStats = runner.runner_stat
             const runnerFullStats = {
                 runnerStats: runnerStats,
-                personalBest: runnerPersonalBest
+                personalBest: runnerPersonalBest,
+                points: runner.points
             }
 
             const runnerInfo = {
@@ -43,7 +44,13 @@ export const Runner = (props: any) => {
             pb16: '0',
             pb70: '0',
             pb120: '0',
+        },
+        points: {
+            pb16: '0',
+            pb70: '0',
+            pb120: '0',
         }
+
     }
     const intialRunnerInfo = {runnerInfo: {}}
 
@@ -59,7 +66,9 @@ export const Runner = (props: any) => {
 
 
             <ContentRow components={[<RunnerStatsCharts personalBest={runnerStats.personalBest}
-                                                        runnerStats={runnerStats.runnerStats}/>]}
+                                                        runnerStats={runnerStats.runnerStats}
+                                                        points = {runnerStats.points}
+                                                        />]}
                         title={"Charts"}/>
 
         </div>

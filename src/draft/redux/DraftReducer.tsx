@@ -31,14 +31,17 @@ export type Runner = {
     "discord_name": string,
     "speedrun_link": string,
     "speedrun_name": string,
-    "speedrun_api_link": string
+    "speedrun_api_link": string,
     runner_stat: RunnerPersonalBest
+    points: RunnerPersonalBest
+    runner_personal_best: RunnerPersonalBest
 }
 
 export type RunnerPersonalBest = {
     pb16: string
     pb70: string
     pb120: string
+    pbTotal?: string
 }
 
 export interface AvailableDraftRunner {

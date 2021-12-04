@@ -36,8 +36,6 @@ export const TeamDraftedPlayers = () => {
         axios.get('https://backend.sm64fantasy.com/api/team/').then((response) => {
                 const teams = response.data;
                 let id = 0;
-                console.log(response.data)
-
                 teams.forEach(
                     (team: any) => {
                         const roster = team.roster;

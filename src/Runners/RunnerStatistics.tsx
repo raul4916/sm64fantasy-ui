@@ -6,6 +6,7 @@ import {RunnerPesonalBestTable} from "./RunnerPesonalBestTable"
 export type RunnerStats = {
     runnerStats: RunnerStat[]
     personalBest: RunnerPersonalBest
+    points: RunnerPersonalBest
 }
 
 export type RunnerStat = {
@@ -17,6 +18,9 @@ export type RunnerStat = {
 
 export const RunnerStatistics = (props: { runnerStats: RunnerStats }) => {
     return (
-        <RunnerPesonalBestTable runnerPersonalBest={props.runnerStats.personalBest}/>
+        <RunnerPesonalBestTable
+            runnerPersonalBest={props.runnerStats.personalBest}
+            runnerPoints={props.runnerStats.points}
+        />
     )
 }
