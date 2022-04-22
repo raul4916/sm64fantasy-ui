@@ -27,5 +27,4 @@ function App() {
 }
 
 export default App;
-export
-type State = ReturnType<typeof rootReducer>
+export type State = ReturnType<typeof rootReducer>
