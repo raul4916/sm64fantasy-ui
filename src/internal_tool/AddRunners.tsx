@@ -8,7 +8,6 @@ import {State} from "../App";
 
 const setupRunnerStat = (player: string, config: any) => {
     axios.get('https://www.speedrun.com/api/v1/users/' + player + '/personal-bests').then(
-        //120 wkpoo02r  70 7dgrrxk4 16 n2y55mko
         (response) => {
             let personalBests: any = response.data.data;
             axios.get('https://backend.sm64fantasy.com/api/runner?name=' + player, config).then((response) => {
